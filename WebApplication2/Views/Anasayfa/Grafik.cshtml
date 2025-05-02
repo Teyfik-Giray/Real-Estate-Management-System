@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Grafik";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+<h2>Grafik</h2>
+
+@model List<TBL_kasa>
+<div class="col-sm-6 col-lg-3">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="subheader">Sales</div>
+                <div class="ms-auto lh-1">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item active" href="#">Last 7 days</a>
+                            <a class="dropdown-item" href="#">Last 30 days</a>
+                            <a class="dropdown-item" href="#">Last 3 months</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h1 mb-3">5%</div>
+            <div class="d-flex mb-2">
+                <div>Conversion rate</div>
+                <div class="ms-auto">
+                    <span class="text-green d-inline-flex align-items-center lh-1">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3 17l6 -6l4 4l8 -8"></path>
+                            <path d="M14 7l7 0l0 7"></path>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                double value = item.net_gelir.HasValue ? (double)item.net_gelir.Value : 0.0;
+                double net_gelir = Math.Min((value / 1000000) * 100, 100);
+
+                <div class="progress progress-sm">
+                    <div class="progress-bar bg-primary" style="width: @net_gelir%" role="progressbar" aria-valuenow="@net_gelir" aria-valuemin="0" aria-valuemax="100" aria-label="@net_gelir% Complete">
+                        <span class="visually-hidden">@net_gelir% Complete</span>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

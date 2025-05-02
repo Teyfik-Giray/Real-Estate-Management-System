@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "GayrimenkulDurumBilgileri";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+@using WebApplication2;
+
+@model List<TBL_konut>
+<br />
+<br />
+<table class="table">
+    <tr class="bg-azure-lt">
+        <th style="color:darkblue;">KONUT SAHİBİ ADI</th>
+        <th style="color:darkblue;">KİRACI ADI</th>
+        <th style="color:darkblue;">KONUT ADRES</th>
+        <th style="color:darkblue;">KİRA TUTARI</th>
+        <th style="color:darkblue;">KİRA DURUM</th>
+        <th style="color:darkblue;">SİL</th>
+        <th style="color:darkblue;">GÜNCELLE</th>
+    </tr>
+    <tbody>
+        @foreach (var ktgr in Model)
+        {
+            <tr class="bg-blue-lt">
+                <td style="color:black;"><b>@ktgr.TBL_evsahibi.konuts_ad @ktgr.TBL_evsahibi.konuts_soyad</b></td>
+                <td style="color:black;"><b>@ktgr.TBL_kiraci.kiraci_ad @ktgr.TBL_kiraci.kiraci_soyad</b></td>
+                <td style="color:black;"><b>@ktgr.konut_adres</b></td>
+                <td style="color:black;"><b>@ktgr.kira_tutar ₺</b></td>
+                <td style="color:black;">
+                    <b>
+                        @if (ktgr.Kira_Durum.HasValue)
+                        {
+                            if (ktgr.Kira_Durum.Value)
+                            {
+                                <label style="color:green">Ödendi</label>
+                            }
+                            else
+                            {
+                                <label style="color:red">Ödenmedi</label>
+                            }
+                        }
+                        else
+                        {
+                            <label>Bilinmiyor</label>
+                        }
+                    </b>
+                </td>
+                <td style="color:black;">
+                    <button class="btn btn-danger" onclick="confirmDelete('@ktgr.konut_id')">SİL</button>
+                </td>
+                <td style="color:black;"><a href="/VeriIslemleri/UrunGetir2/@ktgr.konut_id" class="btn btn-success">GÜNCELLE</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/VeriIslemleri/Eklee/" class="btn btn-primary">Yeni Kayıt Ekle</a>
+
+<!-- Modal -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p class="modal-message">Kaydı silmek istediğinize emin misiniz?</p>
+        <div class="modal-buttons">
+            <button class="btn btn-danger" onclick="deleteRecord()">Evet</button>
+            <button class="btn btn-secondary" onclick="closeModal()">Hayır</button>
+        </div>
+    </div>
+</div>
+
+<!-- Validation Modal -->
+<div id="validationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeValidationModal()">&times;</span>
+        <p class="modal-message">Tüm alanlar doldurulmalıdır!</p>
+    </div>
+</div>
+
+<!-- Update Modal -->
+<div id="updateModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeUpdateModal()">&times;</span>
+        <p class="modal-message">Verileriniz güncellendi!</p>
+    </div>
+</div>
+
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: 15% auto;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .modal-message {
+        font-size: 18px;
+        color: #333;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+        color: #aaa;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+</style>
+
+<script>
+    var validationMessageVisible = false;
+    var updateMessageVisible = false;
+
+    // Fonksiyonlar
+    function confirmDelete(konut_id) {
+        var modal = document.getElementById('confirmModal');
+        var modalMessage = modal.querySelector('.modal-message');
+        modalMessage.innerHTML = 'Kaydı silmek istediğinize emin misiniz?';
+
+        modal.style.display = 'block';
+
+        var deleteBtn = modal.querySelector('.btn-danger');
+        deleteBtn.onclick = function () {
+            window.location.href = '/VeriIslemleri/Sill/' + konut_id;
+        };
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('confirmModal');
+        modal.style.display = 'none';
+    }
+
+    function closeValidationModal() {
+        var modal = document.getElementById('validationModal');
+        modal.style.display = 'none';
+    }
+
+    function closeUpdateModal() {
+        var modal = document.getElementById('updateModal');
+        modal.style.display = 'none';
+    }
+
+    // Sayfa yüklendiğinde kontrol
+    window.onload = function () {
+        var validationModal = document.getElementById('validationModal');
+        var updateModal = document.getElementById('updateModal');
+
+        // Validation modal göster
+        if (validationMessageVisible) {
+            validationModal.style.display = 'block';
+        }
+
+        // Update modal göster
+        if (updateMessageVisible) {
+            updateModal.style.display = 'block';
+            setTimeout(function () {
+                window.location.href = '@Url.Action("GayrimenkulDurumBilgileri", "Anasayfa")';
+            }, 2000); // 2 saniye sonra yönlendir
+        }
+    };
+</script>

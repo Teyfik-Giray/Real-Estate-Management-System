@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Ekle3";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+            .form-container h2 {
+                margin-bottom: 20px;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 60px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-message {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h6>Bu sayfada yeni sözleşme ekleme işlemini gerçekleştirmektesiniz...</h6>
+        <br />
+        @using (Html.BeginForm("Ekle3", "VeriIslemleri", FormMethod.Post, new { @class = "form-group", @name = "sozlesmeForm", @onsubmit = "return validateForm()" }))
+        {
+            <div class="form-group">
+                <label style="color:darkblue">KONUT BİLGİSİ</label>
+                @Html.DropDownList("konut_id", (SelectList)ViewBag.Konutlar, "Seçiniz", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">KİRACI</label>
+                @Html.DropDownList("kiraci_id", (SelectList)ViewBag.Kiracilar, "Seçiniz", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">EV SAHİBİ</label>
+                @Html.DropDownList("konutsahibi_id", (SelectList)ViewBag.EvSahipleri, "Seçiniz", new { @class = "form-control" })
+            </div>
+
+
+            <div class="form-group">
+                <label style="color:darkblue">SÖZLEŞME TARİHİ</label>
+                @Html.TextBox("soz_tarih", null, new { @type = "date", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">KONTRAT BİLGİSİ</label>
+                @Html.TextBox("kontrat_bilgisi", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">DEPOZİTO TUTAR</label>
+                @Html.TextBox("depozito_tutar", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Depozito Durumu</label>
+                <select class="form-control" name="depozito_durum">
+                    <option value="">Seçiniz</option>
+                    <option value="False">Ödenmedi</option>
+                    <option value="True">Ödendi</option>
+                </select>
+            </div>
+
+
+            <button class="btn btn-primary btn-block" type="submit">KAYDET</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="confirmCancel()">İPTAL</button>
+        }
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p class="modal-message"></p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var konut_id = document.forms["sozlesmeForm"]["konut_id"].value;
+            var kiraci_id = document.forms["sozlesmeForm"]["kiraci_id"].value;
+            var konuts_id = document.forms["sozlesmeForm"]["konuts_id"].value;
+            var soz_tarih = document.forms["sozlesmeForm"]["soz_tarih"].value;
+            var kontrat_bilgisi = document.forms["sozlesmeForm"]["kontrat_bilgisi"].value;
+            var depozito_tutar = document.forms["sozlesmeForm"]["depozito_tutar"].value;
+            var depozito_durum = document.forms["sozlesmeForm"]["depozito_durum"].value;
+
+            if (konut_id == "" || kiraci_id == "" || konuts_id == "" || soz_tarih == "" || kontrat_bilgisi == "" || depozito_tutar == "" || depozito_durum == "") {
+                var modal = document.getElementById("myModal");
+                var modalMessage = document.querySelector(".modal-message");
+                modalMessage.innerHTML = "Tüm alanlar doldurulmalıdır!";
+                modal.style.display = "block";
+                return false;
+            }
+            return true;
+        }
+
+        function confirmCancel() {
+            var modal = document.getElementById("myModal");
+            var modalMessage = document.querySelector(".modal-message");
+            modalMessage.innerHTML = "İşlem iptal edildi. Ana sayfaya yönlendiriliyorsunuz.";
+            modal.style.display = "block";
+            setTimeout(function() {
+                window.location.href = '@Url.Action("KiraKontratlari", "Anasayfa")';
+            }, 2000);
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

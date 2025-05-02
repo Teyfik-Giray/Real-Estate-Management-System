@@ -1,0 +1,49 @@
+﻿
+@*@{
+    ViewBag.Title = "UrunGetir1";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+<h2>UrunGetir1</h2>
+
+@model WebApplication2.TBL_gayrimenkul_durum
+
+
+
+@using (Html.BeginForm("Guncelle1", "VeriIslemleri", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.gayrimenkul_durum_id)
+        @Html.TextBoxFor(m => m.gayrimenkul_durum_id, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.TBL_konutturu.konuttur_ad)
+        @Html.TextBoxFor(m => m.TBL_konutturu.konuttur_ad, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.TBL_konutturu.oda_sayısı)
+        @Html.TextBoxFor(m => m.TBL_konutturu.oda_sayısı, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.TBL_konutturu.metre_kare)
+        @Html.TextBoxFor(m => m.TBL_konutturu.metre_kare, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.TBL_konutturu.ısınma_turu)
+        @Html.TextBoxFor(m => m.TBL_konutturu.ısınma_turu, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.TBL_konutturu.esyalimi)
+        @Html.TextBoxFor(m => m.TBL_konutturu.esyalimi, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.TBL_konutturu.adres)
+        @Html.TextBoxFor(m => m.TBL_konutturu.adres, new { @class = "form-control" })  
+        <br />
+        @Html.LabelFor(m => m.gayrimenkul_durum)
+        @Html.TextBoxFor(m => m.gayrimenkul_durum, new { @class = "form-control" })  
+        <br />
+        @Html.LabelFor(m => m.gayrimenkul_tip)
+        @Html.TextBoxFor(m => m.gayrimenkul_tip, new { @class = "form-control" })
+
+
+    </div>
+
+    <div>
+        <button class="btn-warning"> Güncelle</button>
+    </div>
+}*@

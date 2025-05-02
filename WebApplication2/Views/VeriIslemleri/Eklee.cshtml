@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "Eklee";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+            .form-container h2 {
+                margin-bottom: 20px;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 60px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-message {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h6>Bu sayfada kira ekleme işlemini gerçekleştirmektesiniz...</h6>
+        <br />
+        <form class="form-group" method="post" name="konutForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label style="color:darkblue">Ev Sahibi Adı</label>
+                <select class="form-control" name="konuts_id">
+                    <option value="">Seçiniz</option>
+                    @foreach (var evsahibi in ViewBag.EvSahipleri)
+                    {
+                        <option value="@evsahibi.konuts_id">@evsahibi.konuts_ad @evsahibi.konuts_soyad </option>
+                    }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Kiracı Adı</label>
+                <select class="form-control" name="kiraci_id">
+                    <option value="">Seçiniz</option>
+                    @foreach (var kiraci in ViewBag.Kiracilar)
+                    {
+                        <option value="@kiraci.kiraci_id">@kiraci.kiraci_ad @kiraci.kiraci_soyad </option>
+                    }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Konut Adresi</label>
+                <input type="text" class="form-control" name="konut_adres" />
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Kira Tutarı</label>
+                <input type="text" class="form-control" name="kira_tutar" />
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Kira Durumu</label>
+                <select class="form-control" name="Kira_Durum">
+                    <option value="">Seçiniz</option>
+                    <option value="false">Ödenmedi</option>
+                    <option value="true">Ödendi</option>
+                </select>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">KAYDET</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="confirmCancel()">İPTAL</button>
+        </form>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p class="modal-message">Some text in the Modal..</p>
+        </div>
+    </div>
+
+    <script>
+    function validateForm() {
+        var konuts_id = document.forms["konutForm"]["konuts_id"].value;
+        var kiraci_id = document.forms["konutForm"]["kiraci_id"].value;
+        var konut_adres = document.forms["konutForm"]["konut_adres"].value;
+        var kira_tutar = document.forms["konutForm"]["kira_tutar"].value;
+        var Kira_Durum = document.forms["konutForm"]["Kira_Durum"].value;
+
+        if (konuts_id == "" || kiraci_id == "" || konut_adres == "" || kira_tutar == "" || Kira_Durum == "") {
+            var modal = document.getElementById("myModal");
+            var modalMessage = document.querySelector(".modal-message");
+            modalMessage.innerHTML = "Tüm alanlar doldurulmalıdır!";
+            modal.style.display = "block";
+            return false;
+        }
+        return true;
+    }
+
+    function confirmCancel() {
+        var modal = document.getElementById("myModal");
+        var modalMessage = document.querySelector(".modal-message");
+        modalMessage.innerHTML = "İşlem iptal edildi. Ana sayfaya yönlendiriliyorsunuz.";
+        modal.style.display = "block";
+        setTimeout(function() {
+            window.location.href = '@Url.Action("KiraKontratlari", "Anasayfa")';
+        }, 2000);
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

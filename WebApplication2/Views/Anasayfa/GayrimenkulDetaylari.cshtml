@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "GayrimenkulDetaylari";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+@using WebApplication2;
+
+@model List<TBL_konutturu>
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+   
+            <div class="card-body">
+                <table class="table">
+                    <tr class="bg-azure-lt">
+                        <th style="color:darkblue;">KONUT ADI</th>
+                        <th style="color:darkblue;">ODA SAYISI</th>
+                        <th style="color:darkblue;">METREKARE BİLGİSİ</th>
+                        <th style="color:darkblue;">ISINMA TÜRÜ</th>
+                        <th style="color:darkblue;">EŞYALI MI </th>
+                        <th style="color:darkblue;">KONUT ADRES</th>
+        
+                        <th style="color:darkblue;">KONUT DURUMU</th>
+                       
+                    </tr>
+                    <tbody>
+                        @foreach (var ktgr in Model)
+                        {
+                            <tr class="bg-blue-lt">
+                                <td style="color:black;"><b>@ktgr.konuttur_ad</b></td>
+                                <td style="color:black;"><b>@ktgr.oda_sayısı</b></td>
+                                <td style="color:black;"><b>@ktgr.metre_kare m2</b></td>
+                                <td style="color:black;"><b>@ktgr.ısınma_turu</b></td>
+                                <td style="color:black;"><b>@ktgr.esyalimi</b></td>
+                                <td style="color:black;"><b>@ktgr.adres</b></td>
+                                <td style="color:black;"><b>@ktgr.gayrimenkul_durum</b></td>
+                             
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+ 
+</div>
+

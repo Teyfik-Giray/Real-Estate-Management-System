@@ -1,0 +1,1799 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{34958A56-C24A-4031-A85C-48B597196D84}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication2</RootNamespace>
+    <AssemblyName>WebApplication2</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44360</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.38.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.38.0\lib\net472\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Identity, Version=1.11.3.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Identity.1.11.3\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.SqlClient, Version=5.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.SqlClient.5.2.1\lib\net462\Microsoft.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.60.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.60.3\lib\net462\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=4.60.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.4.60.3\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.35.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ClientModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ClientModel.1.0.0\lib\netstandard2.0\System.ClientModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.6.0.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.1\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.35.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AnasayfaController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KullaniciController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\VeriIslemleriController.cs" />
+    <Compile Include="GetAylıkGelir.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model3.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model3.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model3.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\MyViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_admin.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_aylık_gelir.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_evsahibi.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_gayrimenkul_durum.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_kasa.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_kiraci.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_konut.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_konutturu.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_sozlesme.cs">
+      <DependentUpon>Model3.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="demo\dist\css\demo.css" />
+    <Content Include="demo\dist\css\demo.min.css" />
+    <Content Include="demo\dist\css\demo.rtl.css" />
+    <Content Include="demo\dist\css\demo.rtl.min.css" />
+    <Content Include="demo\dist\css\tabler-flags.css" />
+    <Content Include="demo\dist\css\tabler-flags.min.css" />
+    <Content Include="demo\dist\css\tabler-flags.rtl.css" />
+    <Content Include="demo\dist\css\tabler-flags.rtl.min.css" />
+    <Content Include="demo\dist\css\tabler-payments.css" />
+    <Content Include="demo\dist\css\tabler-payments.min.css" />
+    <Content Include="demo\dist\css\tabler-payments.rtl.css" />
+    <Content Include="demo\dist\css\tabler-payments.rtl.min.css" />
+    <Content Include="demo\dist\css\tabler-social.css" />
+    <Content Include="demo\dist\css\tabler-social.min.css" />
+    <Content Include="demo\dist\css\tabler-social.rtl.css" />
+    <Content Include="demo\dist\css\tabler-social.rtl.min.css" />
+    <Content Include="demo\dist\css\tabler-vendors.css" />
+    <Content Include="demo\dist\css\tabler-vendors.min.css" />
+    <Content Include="demo\dist\css\tabler-vendors.rtl.css" />
+    <Content Include="demo\dist\css\tabler-vendors.rtl.min.css" />
+    <Content Include="demo\dist\css\tabler.css" />
+    <Content Include="demo\dist\css\tabler.min.css" />
+    <Content Include="demo\dist\css\tabler.rtl.css" />
+    <Content Include="demo\dist\css\tabler.rtl.min.css" />
+    <Content Include="demo\dist\img\flags\ad.svg" />
+    <Content Include="demo\dist\img\flags\ae.svg" />
+    <Content Include="demo\dist\img\flags\af.svg" />
+    <Content Include="demo\dist\img\flags\ag.svg" />
+    <Content Include="demo\dist\img\flags\ai.svg" />
+    <Content Include="demo\dist\img\flags\al.svg" />
+    <Content Include="demo\dist\img\flags\am.svg" />
+    <Content Include="demo\dist\img\flags\ao.svg" />
+    <Content Include="demo\dist\img\flags\aq.svg" />
+    <Content Include="demo\dist\img\flags\ar.svg" />
+    <Content Include="demo\dist\img\flags\as.svg" />
+    <Content Include="demo\dist\img\flags\at.svg" />
+    <Content Include="demo\dist\img\flags\au.svg" />
+    <Content Include="demo\dist\img\flags\aw.svg" />
+    <Content Include="demo\dist\img\flags\ax.svg" />
+    <Content Include="demo\dist\img\flags\az.svg" />
+    <Content Include="demo\dist\img\flags\ba.svg" />
+    <Content Include="demo\dist\img\flags\bb.svg" />
+    <Content Include="demo\dist\img\flags\bd.svg" />
+    <Content Include="demo\dist\img\flags\be.svg" />
+    <Content Include="demo\dist\img\flags\bf.svg" />
+    <Content Include="demo\dist\img\flags\bg.svg" />
+    <Content Include="demo\dist\img\flags\bh.svg" />
+    <Content Include="demo\dist\img\flags\bi.svg" />
+    <Content Include="demo\dist\img\flags\bj.svg" />
+    <Content Include="demo\dist\img\flags\bl.svg" />
+    <Content Include="demo\dist\img\flags\bm.svg" />
+    <Content Include="demo\dist\img\flags\bn.svg" />
+    <Content Include="demo\dist\img\flags\bo.svg" />
+    <Content Include="demo\dist\img\flags\bq.svg" />
+    <Content Include="demo\dist\img\flags\br.svg" />
+    <Content Include="demo\dist\img\flags\bs.svg" />
+    <Content Include="demo\dist\img\flags\bt.svg" />
+    <Content Include="demo\dist\img\flags\bv.svg" />
+    <Content Include="demo\dist\img\flags\bw.svg" />
+    <Content Include="demo\dist\img\flags\by.svg" />
+    <Content Include="demo\dist\img\flags\bz.svg" />
+    <Content Include="demo\dist\img\flags\ca.svg" />
+    <Content Include="demo\dist\img\flags\cc.svg" />
+    <Content Include="demo\dist\img\flags\cd.svg" />
+    <Content Include="demo\dist\img\flags\cf.svg" />
+    <Content Include="demo\dist\img\flags\cg.svg" />
+    <Content Include="demo\dist\img\flags\ch.svg" />
+    <Content Include="demo\dist\img\flags\ci.svg" />
+    <Content Include="demo\dist\img\flags\ck.svg" />
+    <Content Include="demo\dist\img\flags\cl.svg" />
+    <Content Include="demo\dist\img\flags\cm.svg" />
+    <Content Include="demo\dist\img\flags\cn.svg" />
+    <Content Include="demo\dist\img\flags\co.svg" />
+    <Content Include="demo\dist\img\flags\cr.svg" />
+    <Content Include="demo\dist\img\flags\cu.svg" />
+    <Content Include="demo\dist\img\flags\cv.svg" />
+    <Content Include="demo\dist\img\flags\cw.svg" />
+    <Content Include="demo\dist\img\flags\cx.svg" />
+    <Content Include="demo\dist\img\flags\cy.svg" />
+    <Content Include="demo\dist\img\flags\cz.svg" />
+    <Content Include="demo\dist\img\flags\de.svg" />
+    <Content Include="demo\dist\img\flags\dj.svg" />
+    <Content Include="demo\dist\img\flags\dk.svg" />
+    <Content Include="demo\dist\img\flags\dm.svg" />
+    <Content Include="demo\dist\img\flags\do.svg" />
+    <Content Include="demo\dist\img\flags\dz.svg" />
+    <Content Include="demo\dist\img\flags\ec.svg" />
+    <Content Include="demo\dist\img\flags\ee.svg" />
+    <Content Include="demo\dist\img\flags\eg.svg" />
+    <Content Include="demo\dist\img\flags\eh.svg" />
+    <Content Include="demo\dist\img\flags\er.svg" />
+    <Content Include="demo\dist\img\flags\es-ct.svg" />
+    <Content Include="demo\dist\img\flags\es.svg" />
+    <Content Include="demo\dist\img\flags\et.svg" />
+    <Content Include="demo\dist\img\flags\eu.svg" />
+    <Content Include="demo\dist\img\flags\fi.svg" />
+    <Content Include="demo\dist\img\flags\fj.svg" />
+    <Content Include="demo\dist\img\flags\fk.svg" />
+    <Content Include="demo\dist\img\flags\fm.svg" />
+    <Content Include="demo\dist\img\flags\fo.svg" />
+    <Content Include="demo\dist\img\flags\fr.svg" />
+    <Content Include="demo\dist\img\flags\ga.svg" />
+    <Content Include="demo\dist\img\flags\gb-eng.svg" />
+    <Content Include="demo\dist\img\flags\gb-nir.svg" />
+    <Content Include="demo\dist\img\flags\gb-sct.svg" />
+    <Content Include="demo\dist\img\flags\gb-wls.svg" />
+    <Content Include="demo\dist\img\flags\gb.svg" />
+    <Content Include="demo\dist\img\flags\gd.svg" />
+    <Content Include="demo\dist\img\flags\ge.svg" />
+    <Content Include="demo\dist\img\flags\gf.svg" />
+    <Content Include="demo\dist\img\flags\gg.svg" />
+    <Content Include="demo\dist\img\flags\gh.svg" />
+    <Content Include="demo\dist\img\flags\gi.svg" />
+    <Content Include="demo\dist\img\flags\gl.svg" />
+    <Content Include="demo\dist\img\flags\gm.svg" />
+    <Content Include="demo\dist\img\flags\gn.svg" />
+    <Content Include="demo\dist\img\flags\gp.svg" />
+    <Content Include="demo\dist\img\flags\gq.svg" />
+    <Content Include="demo\dist\img\flags\gr.svg" />
+    <Content Include="demo\dist\img\flags\gs.svg" />
+    <Content Include="demo\dist\img\flags\gt.svg" />
+    <Content Include="demo\dist\img\flags\gu.svg" />
+    <Content Include="demo\dist\img\flags\gw.svg" />
+    <Content Include="demo\dist\img\flags\gy.svg" />
+    <Content Include="demo\dist\img\flags\hk.svg" />
+    <Content Include="demo\dist\img\flags\hm.svg" />
+    <Content Include="demo\dist\img\flags\hn.svg" />
+    <Content Include="demo\dist\img\flags\hr.svg" />
+    <Content Include="demo\dist\img\flags\ht.svg" />
+    <Content Include="demo\dist\img\flags\hu.svg" />
+    <Content Include="demo\dist\img\flags\id.svg" />
+    <Content Include="demo\dist\img\flags\ie.svg" />
+    <Content Include="demo\dist\img\flags\il.svg" />
+    <Content Include="demo\dist\img\flags\im.svg" />
+    <Content Include="demo\dist\img\flags\in.svg" />
+    <Content Include="demo\dist\img\flags\io.svg" />
+    <Content Include="demo\dist\img\flags\iq.svg" />
+    <Content Include="demo\dist\img\flags\ir.svg" />
+    <Content Include="demo\dist\img\flags\is.svg" />
+    <Content Include="demo\dist\img\flags\it.svg" />
+    <Content Include="demo\dist\img\flags\je.svg" />
+    <Content Include="demo\dist\img\flags\jm.svg" />
+    <Content Include="demo\dist\img\flags\jo.svg" />
+    <Content Include="demo\dist\img\flags\jp.svg" />
+    <Content Include="demo\dist\img\flags\ke.svg" />
+    <Content Include="demo\dist\img\flags\kg.svg" />
+    <Content Include="demo\dist\img\flags\kh.svg" />
+    <Content Include="demo\dist\img\flags\ki.svg" />
+    <Content Include="demo\dist\img\flags\km.svg" />
+    <Content Include="demo\dist\img\flags\kn.svg" />
+    <Content Include="demo\dist\img\flags\kp.svg" />
+    <Content Include="demo\dist\img\flags\kr.svg" />
+    <Content Include="demo\dist\img\flags\kw.svg" />
+    <Content Include="demo\dist\img\flags\ky.svg" />
+    <Content Include="demo\dist\img\flags\kz.svg" />
+    <Content Include="demo\dist\img\flags\la.svg" />
+    <Content Include="demo\dist\img\flags\lb.svg" />
+    <Content Include="demo\dist\img\flags\lc.svg" />
+    <Content Include="demo\dist\img\flags\li.svg" />
+    <Content Include="demo\dist\img\flags\lk.svg" />
+    <Content Include="demo\dist\img\flags\lr.svg" />
+    <Content Include="demo\dist\img\flags\ls.svg" />
+    <Content Include="demo\dist\img\flags\lt.svg" />
+    <Content Include="demo\dist\img\flags\lu.svg" />
+    <Content Include="demo\dist\img\flags\lv.svg" />
+    <Content Include="demo\dist\img\flags\ly.svg" />
+    <Content Include="demo\dist\img\flags\ma.svg" />
+    <Content Include="demo\dist\img\flags\mc.svg" />
+    <Content Include="demo\dist\img\flags\md.svg" />
+    <Content Include="demo\dist\img\flags\me.svg" />
+    <Content Include="demo\dist\img\flags\mf.svg" />
+    <Content Include="demo\dist\img\flags\mg.svg" />
+    <Content Include="demo\dist\img\flags\mh.svg" />
+    <Content Include="demo\dist\img\flags\mk.svg" />
+    <Content Include="demo\dist\img\flags\ml.svg" />
+    <Content Include="demo\dist\img\flags\mm.svg" />
+    <Content Include="demo\dist\img\flags\mn.svg" />
+    <Content Include="demo\dist\img\flags\mo.svg" />
+    <Content Include="demo\dist\img\flags\mp.svg" />
+    <Content Include="demo\dist\img\flags\mq.svg" />
+    <Content Include="demo\dist\img\flags\mr.svg" />
+    <Content Include="demo\dist\img\flags\ms.svg" />
+    <Content Include="demo\dist\img\flags\mt.svg" />
+    <Content Include="demo\dist\img\flags\mu.svg" />
+    <Content Include="demo\dist\img\flags\mv.svg" />
+    <Content Include="demo\dist\img\flags\mw.svg" />
+    <Content Include="demo\dist\img\flags\mx.svg" />
+    <Content Include="demo\dist\img\flags\my.svg" />
+    <Content Include="demo\dist\img\flags\mz.svg" />
+    <Content Include="demo\dist\img\flags\na.svg" />
+    <Content Include="demo\dist\img\flags\nc.svg" />
+    <Content Include="demo\dist\img\flags\ne.svg" />
+    <Content Include="demo\dist\img\flags\nf.svg" />
+    <Content Include="demo\dist\img\flags\ng.svg" />
+    <Content Include="demo\dist\img\flags\ni.svg" />
+    <Content Include="demo\dist\img\flags\nl.svg" />
+    <Content Include="demo\dist\img\flags\no.svg" />
+    <Content Include="demo\dist\img\flags\np.svg" />
+    <Content Include="demo\dist\img\flags\nr.svg" />
+    <Content Include="demo\dist\img\flags\nu.svg" />
+    <Content Include="demo\dist\img\flags\nz.svg" />
+    <Content Include="demo\dist\img\flags\om.svg" />
+    <Content Include="demo\dist\img\flags\pa.svg" />
+    <Content Include="demo\dist\img\flags\pe.svg" />
+    <Content Include="demo\dist\img\flags\pf.svg" />
+    <Content Include="demo\dist\img\flags\pg.svg" />
+    <Content Include="demo\dist\img\flags\ph.svg" />
+    <Content Include="demo\dist\img\flags\pk.svg" />
+    <Content Include="demo\dist\img\flags\pl.svg" />
+    <Content Include="demo\dist\img\flags\pm.svg" />
+    <Content Include="demo\dist\img\flags\pn.svg" />
+    <Content Include="demo\dist\img\flags\pr.svg" />
+    <Content Include="demo\dist\img\flags\ps.svg" />
+    <Content Include="demo\dist\img\flags\pt.svg" />
+    <Content Include="demo\dist\img\flags\pw.svg" />
+    <Content Include="demo\dist\img\flags\py.svg" />
+    <Content Include="demo\dist\img\flags\qa.svg" />
+    <Content Include="demo\dist\img\flags\re.svg" />
+    <Content Include="demo\dist\img\flags\ro.svg" />
+    <Content Include="demo\dist\img\flags\rs.svg" />
+    <Content Include="demo\dist\img\flags\ru.svg" />
+    <Content Include="demo\dist\img\flags\rw.svg" />
+    <Content Include="demo\dist\img\flags\sa.svg" />
+    <Content Include="demo\dist\img\flags\sb.svg" />
+    <Content Include="demo\dist\img\flags\sc.svg" />
+    <Content Include="demo\dist\img\flags\sd.svg" />
+    <Content Include="demo\dist\img\flags\se.svg" />
+    <Content Include="demo\dist\img\flags\sg.svg" />
+    <Content Include="demo\dist\img\flags\sh.svg" />
+    <Content Include="demo\dist\img\flags\si.svg" />
+    <Content Include="demo\dist\img\flags\sj.svg" />
+    <Content Include="demo\dist\img\flags\sk.svg" />
+    <Content Include="demo\dist\img\flags\sl.svg" />
+    <Content Include="demo\dist\img\flags\sm.svg" />
+    <Content Include="demo\dist\img\flags\sn.svg" />
+    <Content Include="demo\dist\img\flags\so.svg" />
+    <Content Include="demo\dist\img\flags\sr.svg" />
+    <Content Include="demo\dist\img\flags\ss.svg" />
+    <Content Include="demo\dist\img\flags\st.svg" />
+    <Content Include="demo\dist\img\flags\sv.svg" />
+    <Content Include="demo\dist\img\flags\sx.svg" />
+    <Content Include="demo\dist\img\flags\sy.svg" />
+    <Content Include="demo\dist\img\flags\sz.svg" />
+    <Content Include="demo\dist\img\flags\tc.svg" />
+    <Content Include="demo\dist\img\flags\td.svg" />
+    <Content Include="demo\dist\img\flags\tf.svg" />
+    <Content Include="demo\dist\img\flags\tg.svg" />
+    <Content Include="demo\dist\img\flags\th.svg" />
+    <Content Include="demo\dist\img\flags\tj.svg" />
+    <Content Include="demo\dist\img\flags\tk.svg" />
+    <Content Include="demo\dist\img\flags\tl.svg" />
+    <Content Include="demo\dist\img\flags\tm.svg" />
+    <Content Include="demo\dist\img\flags\tn.svg" />
+    <Content Include="demo\dist\img\flags\to.svg" />
+    <Content Include="demo\dist\img\flags\tr.svg" />
+    <Content Include="demo\dist\img\flags\tt.svg" />
+    <Content Include="demo\dist\img\flags\tv.svg" />
+    <Content Include="demo\dist\img\flags\tw.svg" />
+    <Content Include="demo\dist\img\flags\tz.svg" />
+    <Content Include="demo\dist\img\flags\ua.svg" />
+    <Content Include="demo\dist\img\flags\ug.svg" />
+    <Content Include="demo\dist\img\flags\um.svg" />
+    <Content Include="demo\dist\img\flags\un.svg" />
+    <Content Include="demo\dist\img\flags\us.svg" />
+    <Content Include="demo\dist\img\flags\uy.svg" />
+    <Content Include="demo\dist\img\flags\uz.svg" />
+    <Content Include="demo\dist\img\flags\va.svg" />
+    <Content Include="demo\dist\img\flags\vc.svg" />
+    <Content Include="demo\dist\img\flags\ve.svg" />
+    <Content Include="demo\dist\img\flags\vg.svg" />
+    <Content Include="demo\dist\img\flags\vi.svg" />
+    <Content Include="demo\dist\img\flags\vn.svg" />
+    <Content Include="demo\dist\img\flags\vu.svg" />
+    <Content Include="demo\dist\img\flags\wf.svg" />
+    <Content Include="demo\dist\img\flags\ws.svg" />
+    <Content Include="demo\dist\img\flags\ye.svg" />
+    <Content Include="demo\dist\img\flags\yt.svg" />
+    <Content Include="demo\dist\img\flags\za.svg" />
+    <Content Include="demo\dist\img\flags\zm.svg" />
+    <Content Include="demo\dist\img\flags\zw.svg" />
+    <Content Include="demo\dist\img\payments\2checkout-dark.svg" />
+    <Content Include="demo\dist\img\payments\2checkout.svg" />
+    <Content Include="demo\dist\img\payments\alipay-dark.svg" />
+    <Content Include="demo\dist\img\payments\alipay.svg" />
+    <Content Include="demo\dist\img\payments\amazon-dark.svg" />
+    <Content Include="demo\dist\img\payments\amazon.svg" />
+    <Content Include="demo\dist\img\payments\americanexpress-dark.svg" />
+    <Content Include="demo\dist\img\payments\americanexpress.svg" />
+    <Content Include="demo\dist\img\payments\applepay-dark.svg" />
+    <Content Include="demo\dist\img\payments\applepay.svg" />
+    <Content Include="demo\dist\img\payments\bancontact-dark.svg" />
+    <Content Include="demo\dist\img\payments\bancontact.svg" />
+    <Content Include="demo\dist\img\payments\bitcoin-dark.svg" />
+    <Content Include="demo\dist\img\payments\bitcoin.svg" />
+    <Content Include="demo\dist\img\payments\bitpay-dark.svg" />
+    <Content Include="demo\dist\img\payments\bitpay.svg" />
+    <Content Include="demo\dist\img\payments\blik-dark.svg" />
+    <Content Include="demo\dist\img\payments\blik.svg" />
+    <Content Include="demo\dist\img\payments\cirrus-dark.svg" />
+    <Content Include="demo\dist\img\payments\cirrus.svg" />
+    <Content Include="demo\dist\img\payments\clickandbuy-dark.svg" />
+    <Content Include="demo\dist\img\payments\clickandbuy.svg" />
+    <Content Include="demo\dist\img\payments\coinkite-dark.svg" />
+    <Content Include="demo\dist\img\payments\coinkite.svg" />
+    <Content Include="demo\dist\img\payments\dinersclub-dark.svg" />
+    <Content Include="demo\dist\img\payments\dinersclub.svg" />
+    <Content Include="demo\dist\img\payments\directdebit-dark.svg" />
+    <Content Include="demo\dist\img\payments\directdebit.svg" />
+    <Content Include="demo\dist\img\payments\discover-dark.svg" />
+    <Content Include="demo\dist\img\payments\discover.svg" />
+    <Content Include="demo\dist\img\payments\dotpay-dark.svg" />
+    <Content Include="demo\dist\img\payments\dotpay.svg" />
+    <Content Include="demo\dist\img\payments\dwolla-dark.svg" />
+    <Content Include="demo\dist\img\payments\dwolla.svg" />
+    <Content Include="demo\dist\img\payments\ebay-dark.svg" />
+    <Content Include="demo\dist\img\payments\ebay.svg" />
+    <Content Include="demo\dist\img\payments\epayco-dark.svg" />
+    <Content Include="demo\dist\img\payments\epayco.svg" />
+    <Content Include="demo\dist\img\payments\eway-dark.svg" />
+    <Content Include="demo\dist\img\payments\eway.svg" />
+    <Content Include="demo\dist\img\payments\giropay-dark.svg" />
+    <Content Include="demo\dist\img\payments\giropay.svg" />
+    <Content Include="demo\dist\img\payments\googlewallet-dark.svg" />
+    <Content Include="demo\dist\img\payments\googlewallet.svg" />
+    <Content Include="demo\dist\img\payments\ingenico-dark.svg" />
+    <Content Include="demo\dist\img\payments\ingenico.svg" />
+    <Content Include="demo\dist\img\payments\jcb-dark.svg" />
+    <Content Include="demo\dist\img\payments\jcb.svg" />
+    <Content Include="demo\dist\img\payments\klarna-dark.svg" />
+    <Content Include="demo\dist\img\payments\klarna.svg" />
+    <Content Include="demo\dist\img\payments\laser-dark.svg" />
+    <Content Include="demo\dist\img\payments\laser.svg" />
+    <Content Include="demo\dist\img\payments\maestro-dark.svg" />
+    <Content Include="demo\dist\img\payments\maestro.svg" />
+    <Content Include="demo\dist\img\payments\mastercard-dark.svg" />
+    <Content Include="demo\dist\img\payments\mastercard.svg" />
+    <Content Include="demo\dist\img\payments\mir-dark.svg" />
+    <Content Include="demo\dist\img\payments\mir.svg" />
+    <Content Include="demo\dist\img\payments\monero-dark.svg" />
+    <Content Include="demo\dist\img\payments\monero.svg" />
+    <Content Include="demo\dist\img\payments\neteller-dark.svg" />
+    <Content Include="demo\dist\img\payments\neteller.svg" />
+    <Content Include="demo\dist\img\payments\ogone-dark.svg" />
+    <Content Include="demo\dist\img\payments\ogone.svg" />
+    <Content Include="demo\dist\img\payments\okpay-dark.svg" />
+    <Content Include="demo\dist\img\payments\okpay.svg" />
+    <Content Include="demo\dist\img\payments\paybox-dark.svg" />
+    <Content Include="demo\dist\img\payments\paybox.svg" />
+    <Content Include="demo\dist\img\payments\paymill-dark.svg" />
+    <Content Include="demo\dist\img\payments\paymill.svg" />
+    <Content Include="demo\dist\img\payments\payone-dark.svg" />
+    <Content Include="demo\dist\img\payments\payone.svg" />
+    <Content Include="demo\dist\img\payments\payoneer-dark.svg" />
+    <Content Include="demo\dist\img\payments\payoneer.svg" />
+    <Content Include="demo\dist\img\payments\paypal-dark.svg" />
+    <Content Include="demo\dist\img\payments\paypal.svg" />
+    <Content Include="demo\dist\img\payments\paysafecard-dark.svg" />
+    <Content Include="demo\dist\img\payments\paysafecard.svg" />
+    <Content Include="demo\dist\img\payments\payu-dark.svg" />
+    <Content Include="demo\dist\img\payments\payu.svg" />
+    <Content Include="demo\dist\img\payments\payza-dark.svg" />
+    <Content Include="demo\dist\img\payments\payza.svg" />
+    <Content Include="demo\dist\img\payments\przelewy24-dark.svg" />
+    <Content Include="demo\dist\img\payments\przelewy24.svg" />
+    <Content Include="demo\dist\img\payments\ripple-dark.svg" />
+    <Content Include="demo\dist\img\payments\ripple.svg" />
+    <Content Include="demo\dist\img\payments\sage-dark.svg" />
+    <Content Include="demo\dist\img\payments\sage.svg" />
+    <Content Include="demo\dist\img\payments\sepa-dark.svg" />
+    <Content Include="demo\dist\img\payments\sepa.svg" />
+    <Content Include="demo\dist\img\payments\shopify-dark.svg" />
+    <Content Include="demo\dist\img\payments\shopify.svg" />
+    <Content Include="demo\dist\img\payments\skrill-dark.svg" />
+    <Content Include="demo\dist\img\payments\skrill.svg" />
+    <Content Include="demo\dist\img\payments\solo-dark.svg" />
+    <Content Include="demo\dist\img\payments\solo.svg" />
+    <Content Include="demo\dist\img\payments\square-dark.svg" />
+    <Content Include="demo\dist\img\payments\square.svg" />
+    <Content Include="demo\dist\img\payments\stripe-dark.svg" />
+    <Content Include="demo\dist\img\payments\stripe.svg" />
+    <Content Include="demo\dist\img\payments\switch-dark.svg" />
+    <Content Include="demo\dist\img\payments\switch.svg" />
+    <Content Include="demo\dist\img\payments\tpay-dark.svg" />
+    <Content Include="demo\dist\img\payments\tpay.svg" />
+    <Content Include="demo\dist\img\payments\ukash-dark.svg" />
+    <Content Include="demo\dist\img\payments\ukash.svg" />
+    <Content Include="demo\dist\img\payments\unionpay-dark.svg" />
+    <Content Include="demo\dist\img\payments\unionpay.svg" />
+    <Content Include="demo\dist\img\payments\verifone-dark.svg" />
+    <Content Include="demo\dist\img\payments\verifone.svg" />
+    <Content Include="demo\dist\img\payments\verisign-dark.svg" />
+    <Content Include="demo\dist\img\payments\verisign.svg" />
+    <Content Include="demo\dist\img\payments\visa-dark.svg" />
+    <Content Include="demo\dist\img\payments\visa.svg" />
+    <Content Include="demo\dist\img\payments\webmoney-dark.svg" />
+    <Content Include="demo\dist\img\payments\webmoney.svg" />
+    <Content Include="demo\dist\img\payments\westernunion-dark.svg" />
+    <Content Include="demo\dist\img\payments\westernunion.svg" />
+    <Content Include="demo\dist\img\payments\worldpay-dark.svg" />
+    <Content Include="demo\dist\img\payments\worldpay.svg" />
+    <Content Include="demo\dist\js\demo-theme.js" />
+    <Content Include="demo\dist\js\demo-theme.min.js" />
+    <Content Include="demo\dist\js\demo.js" />
+    <Content Include="demo\dist\js\demo.min.js" />
+    <Content Include="demo\dist\js\tabler.esm.js" />
+    <Content Include="demo\dist\js\tabler.esm.min.js" />
+    <Content Include="demo\dist\js\tabler.js" />
+    <Content Include="demo\dist\js\tabler.min.js" />
+    <Content Include="demo\dist\libs\apexcharts\dist\apexcharts.amd.js" />
+    <Content Include="demo\dist\libs\apexcharts\dist\apexcharts.common.js" />
+    <Content Include="demo\dist\libs\apexcharts\dist\apexcharts.css" />
+    <Content Include="demo\dist\libs\apexcharts\dist\apexcharts.esm.js" />
+    <Content Include="demo\dist\libs\apexcharts\dist\apexcharts.js" />
+    <Content Include="demo\dist\libs\apexcharts\dist\apexcharts.min.js" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.bundle.js" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.esm.js" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="demo\dist\libs\countup.js\dist\countUp.js" />
+    <Content Include="demo\dist\libs\countup.js\dist\countUp.min.js" />
+    <Content Include="demo\dist\libs\countup.js\dist\countUp.umd.js" />
+    <Content Include="demo\dist\libs\countup.js\dist\requestAnimationFrame.polyfill.js" />
+    <Content Include="demo\dist\libs\dropzone\dist\basic.css" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone-min.js" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone.css" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone.js" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone.mjs" />
+    <Content Include="demo\dist\libs\fslightbox\index.js" />
+    <Content Include="demo\dist\libs\jsvectormap\dist\js\jsvectormap.js" />
+    <Content Include="demo\dist\libs\jsvectormap\dist\js\jsvectormap.min.js" />
+    <Content Include="demo\dist\libs\jsvectormap\dist\maps\world-merc.js" />
+    <Content Include="demo\dist\libs\jsvectormap\dist\maps\world.js" />
+    <Content Include="demo\dist\libs\list.js\dist\list.js" />
+    <Content Include="demo\dist\libs\list.js\dist\list.min.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\bundle.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\css\litepicker.css" />
+    <Content Include="demo\dist\libs\litepicker\dist\css\plugins\keyboardnav.js.css" />
+    <Content Include="demo\dist\libs\litepicker\dist\css\plugins\mobilefriendly.js.css" />
+    <Content Include="demo\dist\libs\litepicker\dist\css\plugins\multiselect.js.css" />
+    <Content Include="demo\dist\libs\litepicker\dist\css\plugins\ranges.js.css" />
+    <Content Include="demo\dist\libs\litepicker\dist\js\main.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\litepicker.amd.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\litepicker.commonjs2.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\litepicker.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\litepicker.umd.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\litepicker.amd.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\litepicker.commonjs2.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\litepicker.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\litepicker.umd.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\plugins\keyboardnav.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\plugins\mobilefriendly.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\plugins\multiselect.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\nocss\plugins\ranges.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\plugins\keyboardnav.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\plugins\mobilefriendly.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\plugins\multiselect.js" />
+    <Content Include="demo\dist\libs\litepicker\dist\plugins\ranges.js" />
+    <Content Include="demo\dist\libs\nouislider\dist\nouislider.css" />
+    <Content Include="demo\dist\libs\nouislider\dist\nouislider.js" />
+    <Content Include="demo\dist\libs\nouislider\dist\nouislider.min.css" />
+    <Content Include="demo\dist\libs\nouislider\dist\nouislider.min.js" />
+    <Content Include="demo\dist\libs\nouislider\dist\nouislider.min.mjs" />
+    <Content Include="demo\dist\libs\nouislider\dist\nouislider.mjs" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.css" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.js" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.min.js" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.min.mjs" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.mjs" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.polyfilled.js" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.polyfilled.min.js" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.polyfilled.min.mjs" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.polyfilled.mjs" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.svg" />
+    <Content Include="demo\dist\libs\star-rating.js\dist\star-rating.cjs.js" />
+    <Content Include="demo\dist\libs\star-rating.js\dist\star-rating.css" />
+    <Content Include="demo\dist\libs\star-rating.js\dist\star-rating.esm.js" />
+    <Content Include="demo\dist\libs\star-rating.js\dist\star-rating.esm.min.js" />
+    <Content Include="demo\dist\libs\star-rating.js\dist\star-rating.js" />
+    <Content Include="demo\dist\libs\star-rating.js\dist\star-rating.min.css" />
+    <Content Include="demo\dist\libs\star-rating.js\dist\star-rating.min.js" />
+    <Content Include="demo\dist\libs\tinymce\icons\default\icons.js" />
+    <Content Include="demo\dist\libs\tinymce\icons\default\icons.min.js" />
+    <Content Include="demo\dist\libs\tinymce\icons\default\index.js" />
+    <Content Include="demo\dist\libs\tinymce\license.txt" />
+    <Content Include="demo\dist\libs\tinymce\models\dom\index.js" />
+    <Content Include="demo\dist\libs\tinymce\models\dom\model.js" />
+    <Content Include="demo\dist\libs\tinymce\models\dom\model.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\advlist\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\advlist\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\anchor\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\anchor\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autolink\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autolink\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autoresize\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autoresize\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autosave\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autosave\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\charmap\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\charmap\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\codesample\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\codesample\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\code\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\code\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\directionality\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\directionality\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\emoticons\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\emoticons\js\emojiimages.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\emoticons\js\emojis.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\emoticons\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\fullscreen\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\fullscreen\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\help\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\help\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\image\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\image\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\importcss\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\importcss\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\insertdatetime\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\insertdatetime\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\link\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\link\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\lists\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\lists\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\media\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\media\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\nonbreaking\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\nonbreaking\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\pagebreak\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\pagebreak\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\preview\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\preview\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\quickbars\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\quickbars\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\quickbars\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\save\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\save\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\searchreplace\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\searchreplace\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\table\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\table\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\template\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\template\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\visualblocks\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\visualblocks\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\visualchars\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\visualchars\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\wordcount\index.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\wordcount\plugin.js" />
+    <Content Include="demo\dist\libs\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\dark\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\dark\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\default\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\default\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\document\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\document\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\tinymce-5-dark\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\tinymce-5-dark\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\tinymce-5\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\tinymce-5\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\writer\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\content\writer\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\content.inline.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\skin.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\skin.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\skin.shadowdom.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide-dark\skin.shadowdom.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\content.inline.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\content.inline.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\skin.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\skin.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\skin.shadowdom.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\oxide\skin.shadowdom.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\content.inline.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\content.inline.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\skin.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\skin.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\content.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\content.inline.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\content.inline.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\content.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\skin.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\skin.min.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\skin.shadowdom.css" />
+    <Content Include="demo\dist\libs\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
+    <Content Include="demo\dist\libs\tinymce\themes\silver\index.js" />
+    <Content Include="demo\dist\libs\tinymce\themes\silver\theme.js" />
+    <Content Include="demo\dist\libs\tinymce\themes\silver\theme.min.js" />
+    <Content Include="demo\dist\libs\tinymce\tinymce.js" />
+    <Content Include="demo\dist\libs\tinymce\tinymce.min.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\caret_position.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\change_listener.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\checkbox_options.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\clear_button.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\drag_drop.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\dropdown_header.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\dropdown_input.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\input_autogrow.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\no_active_items.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\no_backspace_delete.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\optgroup_columns.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\remove_button.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\restore_on_backspace.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\virtual_scroll.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.base.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.base.min.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.complete.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.complete.min.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.popular.js" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.popular.min.js" />
+    <Content Include="demo\docs\index.html" />
+    <Content Include="demo\static\avatars\000f.jpg" />
+    <Content Include="demo\static\avatars\000m.jpg" />
+    <Content Include="demo\static\avatars\001f.jpg" />
+    <Content Include="demo\static\avatars\001m.jpg" />
+    <Content Include="demo\static\avatars\002f.jpg" />
+    <Content Include="demo\static\avatars\002m.jpg" />
+    <Content Include="demo\static\avatars\003f.jpg" />
+    <Content Include="demo\static\avatars\003m.jpg" />
+    <Content Include="demo\static\avatars\004f.jpg" />
+    <Content Include="demo\static\avatars\004m.jpg" />
+    <Content Include="demo\static\avatars\005f.jpg" />
+    <Content Include="demo\static\avatars\005m.jpg" />
+    <Content Include="demo\static\avatars\006f.jpg" />
+    <Content Include="demo\static\avatars\006m.jpg" />
+    <Content Include="demo\static\avatars\007f.jpg" />
+    <Content Include="demo\static\avatars\007m.jpg" />
+    <Content Include="demo\static\avatars\008f.jpg" />
+    <Content Include="demo\static\avatars\008m.jpg" />
+    <Content Include="demo\static\avatars\009f.jpg" />
+    <Content Include="demo\static\avatars\009m.jpg" />
+    <Content Include="demo\static\avatars\010f.jpg" />
+    <Content Include="demo\static\avatars\010m.jpg" />
+    <Content Include="demo\static\avatars\011f.jpg" />
+    <Content Include="demo\static\avatars\011m.jpg" />
+    <Content Include="demo\static\avatars\012f.jpg" />
+    <Content Include="demo\static\avatars\012m.jpg" />
+    <Content Include="demo\static\avatars\013f.jpg" />
+    <Content Include="demo\static\avatars\013m.jpg" />
+    <Content Include="demo\static\avatars\014f.jpg" />
+    <Content Include="demo\static\avatars\014m.jpg" />
+    <Content Include="demo\static\avatars\015f.jpg" />
+    <Content Include="demo\static\avatars\015m.jpg" />
+    <Content Include="demo\static\avatars\016f.jpg" />
+    <Content Include="demo\static\avatars\016m.jpg" />
+    <Content Include="demo\static\avatars\017f.jpg" />
+    <Content Include="demo\static\avatars\017m.jpg" />
+    <Content Include="demo\static\avatars\018f.jpg" />
+    <Content Include="demo\static\avatars\018m.jpg" />
+    <Content Include="demo\static\avatars\019f.jpg" />
+    <Content Include="demo\static\avatars\019m.jpg" />
+    <Content Include="demo\static\avatars\020f.jpg" />
+    <Content Include="demo\static\avatars\020m.jpg" />
+    <Content Include="demo\static\avatars\021f.jpg" />
+    <Content Include="demo\static\avatars\021m.jpg" />
+    <Content Include="demo\static\avatars\022f.jpg" />
+    <Content Include="demo\static\avatars\022m.jpg" />
+    <Content Include="demo\static\avatars\023f.jpg" />
+    <Content Include="demo\static\avatars\023m.jpg" />
+    <Content Include="demo\static\avatars\024f.jpg" />
+    <Content Include="demo\static\avatars\024m.jpg" />
+    <Content Include="demo\static\avatars\025f.jpg" />
+    <Content Include="demo\static\avatars\025m.jpg" />
+    <Content Include="demo\static\avatars\026f.jpg" />
+    <Content Include="demo\static\avatars\026m.jpg" />
+    <Content Include="demo\static\avatars\027f.jpg" />
+    <Content Include="demo\static\avatars\027m.jpg" />
+    <Content Include="demo\static\avatars\028f.jpg" />
+    <Content Include="demo\static\avatars\028m.jpg" />
+    <Content Include="demo\static\avatars\029f.jpg" />
+    <Content Include="demo\static\avatars\029m.jpg" />
+    <Content Include="demo\static\avatars\030f.jpg" />
+    <Content Include="demo\static\avatars\030m.jpg" />
+    <Content Include="demo\static\avatars\031f.jpg" />
+    <Content Include="demo\static\avatars\031m.jpg" />
+    <Content Include="demo\static\avatars\032f.jpg" />
+    <Content Include="demo\static\avatars\032m.jpg" />
+    <Content Include="demo\static\avatars\033f.jpg" />
+    <Content Include="demo\static\avatars\033m.jpg" />
+    <Content Include="demo\static\avatars\034f.jpg" />
+    <Content Include="demo\static\avatars\034m.jpg" />
+    <Content Include="demo\static\avatars\035f.jpg" />
+    <Content Include="demo\static\avatars\035m.jpg" />
+    <Content Include="demo\static\avatars\036f.jpg" />
+    <Content Include="demo\static\avatars\036m.jpg" />
+    <Content Include="demo\static\avatars\037f.jpg" />
+    <Content Include="demo\static\avatars\037m.jpg" />
+    <Content Include="demo\static\avatars\038f.jpg" />
+    <Content Include="demo\static\avatars\038m.jpg" />
+    <Content Include="demo\static\avatars\039f.jpg" />
+    <Content Include="demo\static\avatars\039m.jpg" />
+    <Content Include="demo\static\avatars\040f.jpg" />
+    <Content Include="demo\static\avatars\040m.jpg" />
+    <Content Include="demo\static\avatars\041f.jpg" />
+    <Content Include="demo\static\avatars\041m.jpg" />
+    <Content Include="demo\static\avatars\042f.jpg" />
+    <Content Include="demo\static\avatars\042m.jpg" />
+    <Content Include="demo\static\avatars\043f.jpg" />
+    <Content Include="demo\static\avatars\043m.jpg" />
+    <Content Include="demo\static\avatars\044f.jpg" />
+    <Content Include="demo\static\avatars\044m.jpg" />
+    <Content Include="demo\static\avatars\045f.jpg" />
+    <Content Include="demo\static\avatars\045m.jpg" />
+    <Content Include="demo\static\avatars\046f.jpg" />
+    <Content Include="demo\static\avatars\046m.jpg" />
+    <Content Include="demo\static\avatars\047f.jpg" />
+    <Content Include="demo\static\avatars\047m.jpg" />
+    <Content Include="demo\static\avatars\048f.jpg" />
+    <Content Include="demo\static\avatars\048m.jpg" />
+    <Content Include="demo\static\avatars\049f.jpg" />
+    <Content Include="demo\static\avatars\049m.jpg" />
+    <Content Include="demo\static\avatars\050f.jpg" />
+    <Content Include="demo\static\avatars\050m.jpg" />
+    <Content Include="demo\static\avatars\051f.jpg" />
+    <Content Include="demo\static\avatars\051m.jpg" />
+    <Content Include="demo\static\avatars\052f.jpg" />
+    <Content Include="demo\static\avatars\052m.jpg" />
+    <Content Include="demo\static\avatars\053f.jpg" />
+    <Content Include="demo\static\avatars\053m.jpg" />
+    <Content Include="demo\static\avatars\054f.jpg" />
+    <Content Include="demo\static\avatars\054m.jpg" />
+    <Content Include="demo\static\avatars\055f.jpg" />
+    <Content Include="demo\static\avatars\055m.jpg" />
+    <Content Include="demo\static\avatars\056f.jpg" />
+    <Content Include="demo\static\avatars\056m.jpg" />
+    <Content Include="demo\static\avatars\057f.jpg" />
+    <Content Include="demo\static\avatars\057m.jpg" />
+    <Content Include="demo\static\avatars\058f.jpg" />
+    <Content Include="demo\static\avatars\058m.jpg" />
+    <Content Include="demo\static\avatars\059f.jpg" />
+    <Content Include="demo\static\avatars\059m.jpg" />
+    <Content Include="demo\static\avatars\060f.jpg" />
+    <Content Include="demo\static\avatars\060m.jpg" />
+    <Content Include="demo\static\avatars\061f.jpg" />
+    <Content Include="demo\static\avatars\061m.jpg" />
+    <Content Include="demo\static\avatars\062f.jpg" />
+    <Content Include="demo\static\avatars\062m.jpg" />
+    <Content Include="demo\static\avatars\063f.jpg" />
+    <Content Include="demo\static\avatars\063m.jpg" />
+    <Content Include="demo\static\avatars\064f.jpg" />
+    <Content Include="demo\static\avatars\064m.jpg" />
+    <Content Include="demo\static\avatars\065f.jpg" />
+    <Content Include="demo\static\avatars\065m.jpg" />
+    <Content Include="demo\static\avatars\066f.jpg" />
+    <Content Include="demo\static\avatars\066m.jpg" />
+    <Content Include="demo\static\avatars\067f.jpg" />
+    <Content Include="demo\static\avatars\067m.jpg" />
+    <Content Include="demo\static\avatars\068f.jpg" />
+    <Content Include="demo\static\avatars\068m.jpg" />
+    <Content Include="demo\static\avatars\069f.jpg" />
+    <Content Include="demo\static\avatars\069m.jpg" />
+    <Content Include="demo\static\avatars\070f.jpg" />
+    <Content Include="demo\static\avatars\070m.jpg" />
+    <Content Include="demo\static\avatars\071f.jpg" />
+    <Content Include="demo\static\avatars\071m.jpg" />
+    <Content Include="demo\static\avatars\072f.jpg" />
+    <Content Include="demo\static\avatars\072m.jpg" />
+    <Content Include="demo\static\avatars\073m.jpg" />
+    <Content Include="demo\static\avatars\074m.jpg" />
+    <Content Include="demo\static\brands\amazon.svg" />
+    <Content Include="demo\static\brands\android.svg" />
+    <Content Include="demo\static\brands\app-store.svg" />
+    <Content Include="demo\static\brands\apple-podcast.svg" />
+    <Content Include="demo\static\brands\apple.svg" />
+    <Content Include="demo\static\brands\behance.svg" />
+    <Content Include="demo\static\brands\discord.svg" />
+    <Content Include="demo\static\brands\dribbble.svg" />
+    <Content Include="demo\static\brands\dropbox.svg" />
+    <Content Include="demo\static\brands\ever-green.svg" />
+    <Content Include="demo\static\brands\facebook.svg" />
+    <Content Include="demo\static\brands\figma.svg" />
+    <Content Include="demo\static\brands\font-awesome.svg" />
+    <Content Include="demo\static\brands\google-ads.svg" />
+    <Content Include="demo\static\brands\google-adsense.svg" />
+    <Content Include="demo\static\brands\google-analytics.svg" />
+    <Content Include="demo\static\brands\google-cloud.svg" />
+    <Content Include="demo\static\brands\google-drive.svg" />
+    <Content Include="demo\static\brands\google-fit.svg" />
+    <Content Include="demo\static\brands\google-home.svg" />
+    <Content Include="demo\static\brands\google-maps.svg" />
+    <Content Include="demo\static\brands\google-meet.svg" />
+    <Content Include="demo\static\brands\google-photos.svg" />
+    <Content Include="demo\static\brands\google-play.svg" />
+    <Content Include="demo\static\brands\google-shopping.svg" />
+    <Content Include="demo\static\brands\google-teams.svg" />
+    <Content Include="demo\static\brands\google.svg" />
+    <Content Include="demo\static\brands\instagram.svg" />
+    <Content Include="demo\static\brands\klarna.svg" />
+    <Content Include="demo\static\brands\linkedin.svg" />
+    <Content Include="demo\static\brands\mailchimp.svg" />
+    <Content Include="demo\static\brands\medium.svg" />
+    <Content Include="demo\static\brands\messenger.svg" />
+    <Content Include="demo\static\brands\meta.svg" />
+    <Content Include="demo\static\brands\monday.svg" />
+    <Content Include="demo\static\brands\netflix.svg" />
+    <Content Include="demo\static\brands\notion.svg" />
+    <Content Include="demo\static\brands\office-365.svg" />
+    <Content Include="demo\static\brands\opera.svg" />
+    <Content Include="demo\static\brands\paypal.svg" />
+    <Content Include="demo\static\brands\petreon.svg" />
+    <Content Include="demo\static\brands\pinterest.svg" />
+    <Content Include="demo\static\brands\play-store.svg" />
+    <Content Include="demo\static\brands\quora.svg" />
+    <Content Include="demo\static\brands\reddit.svg" />
+    <Content Include="demo\static\brands\shopify.svg" />
+    <Content Include="demo\static\brands\skype.svg" />
+    <Content Include="demo\static\brands\slack.svg" />
+    <Content Include="demo\static\brands\snapchat.svg" />
+    <Content Include="demo\static\brands\soundcloud.svg" />
+    <Content Include="demo\static\brands\spotify.svg" />
+    <Content Include="demo\static\brands\stripe.svg" />
+    <Content Include="demo\static\brands\telegram.svg" />
+    <Content Include="demo\static\brands\tiktok.svg" />
+    <Content Include="demo\static\brands\tinder.svg" />
+    <Content Include="demo\static\brands\trello.svg" />
+    <Content Include="demo\static\brands\truth.svg" />
+    <Content Include="demo\static\brands\tumblr.svg" />
+    <Content Include="demo\static\brands\twitch.svg" />
+    <Content Include="demo\static\brands\twitter.svg" />
+    <Content Include="demo\static\brands\vimeo.svg" />
+    <Content Include="demo\static\brands\vk.svg" />
+    <Content Include="demo\static\brands\watppad.svg" />
+    <Content Include="demo\static\brands\webflow.svg" />
+    <Content Include="demo\static\brands\whatsapp.svg" />
+    <Content Include="demo\static\brands\wordpress.svg" />
+    <Content Include="demo\static\brands\xing.svg" />
+    <Content Include="demo\static\brands\yelp.svg" />
+    <Content Include="demo\static\brands\youtube.svg" />
+    <Content Include="demo\static\brands\zapier.svg" />
+    <Content Include="demo\static\brands\zendesk.svg" />
+    <Content Include="demo\static\brands\zoom.svg" />
+    <Content Include="demo\static\browsers\brave.svg" />
+    <Content Include="demo\static\browsers\chrome.svg" />
+    <Content Include="demo\static\browsers\edge.svg" />
+    <Content Include="demo\static\browsers\electron.svg" />
+    <Content Include="demo\static\browsers\firefox.svg" />
+    <Content Include="demo\static\browsers\internet-explorer.svg" />
+    <Content Include="demo\static\browsers\opera.svg" />
+    <Content Include="demo\static\browsers\safari.svg" />
+    <Content Include="demo\static\browsers\vivaldi.svg" />
+    <Content Include="demo\static\components\card-buttons.png" />
+    <Content Include="demo\static\components\card-comments.png" />
+    <Content Include="demo\static\components\card-ribbon.png" />
+    <Content Include="demo\static\components\card-tabs-bottom.png" />
+    <Content Include="demo\static\components\card-with-image.png" />
+    <Content Include="demo\static\components\empty.png" />
+    <Content Include="demo\static\components\input-colors.png" />
+    <Content Include="demo\static\components\input-image.png" />
+    <Content Include="demo\static\components\simple-avatar.png" />
+    <Content Include="demo\static\components\simple-card.png" />
+    <Content Include="demo\static\components\widget-revenue.png" />
+    <Content Include="demo\static\components\widget-sales.png" />
+    <Content Include="demo\static\crypto-currencies\bitcoin.svg" />
+    <Content Include="demo\static\crypto-currencies\cardano.svg" />
+    <Content Include="demo\static\crypto-currencies\dash.svg" />
+    <Content Include="demo\static\crypto-currencies\eos.svg" />
+    <Content Include="demo\static\crypto-currencies\ethereum.svg" />
+    <Content Include="demo\static\crypto-currencies\litecoin.svg" />
+    <Content Include="demo\static\crypto-currencies\nem.svg" />
+    <Content Include="demo\static\crypto-currencies\ripple.svg" />
+    <Content Include="demo\static\illustrations\undraw_bug_fixing_oc7a.svg" />
+    <Content Include="demo\static\illustrations\undraw_joyride_hnno.svg" />
+    <Content Include="demo\static\illustrations\undraw_medicine_b1ol.svg" />
+    <Content Include="demo\static\illustrations\undraw_mobile_application_mr4r.svg" />
+    <Content Include="demo\static\illustrations\undraw_posting_photo_v65l.svg" />
+    <Content Include="demo\static\illustrations\undraw_printing_invoices_5r4r.svg" />
+    <Content Include="demo\static\illustrations\undraw_quitting_time_dm8t.svg" />
+    <Content Include="demo\static\illustrations\undraw_secure_login_pdn4.svg" />
+    <Content Include="demo\static\illustrations\undraw_sign_in_e6hj.svg" />
+    <Content Include="demo\static\illustrations\undraw_work_together_h63l.svg" />
+    <Content Include="demo\static\jobs\job-1.jpg" />
+    <Content Include="demo\static\jobs\job-2.png" />
+    <Content Include="demo\static\jobs\job-3.png" />
+    <Content Include="demo\static\jobs\job-4.png" />
+    <Content Include="demo\static\jobs\job-5.png" />
+    <Content Include="demo\static\jobs\job-6.png" />
+    <Content Include="demo\static\jobs\job-7.png" />
+    <Content Include="demo\static\jobs\job-8.png" />
+    <Content Include="demo\static\jobs\job-9.jpg" />
+    <Content Include="demo\static\logo-small-white.svg" />
+    <Content Include="demo\static\logo-small.svg" />
+    <Content Include="demo\static\logo-white.svg" />
+    <Content Include="demo\static\logo.svg" />
+    <Content Include="demo\static\og.png" />
+    <Content Include="demo\static\photos\a-visit-to-the-bookstore.jpg" />
+    <Content Include="demo\static\photos\a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg" />
+    <Content Include="demo\static\photos\a-woman-works-on-a-laptop-at-home-2.jpg" />
+    <Content Include="demo\static\photos\a-woman-works-on-a-laptop-at-home-3.jpg" />
+    <Content Include="demo\static\photos\a-woman-works-on-a-laptop-at-home.jpg" />
+    <Content Include="demo\static\photos\beautiful-blonde-woman-on-a-wooden-pier-by-the-lake.jpg" />
+    <Content Include="demo\static\photos\beautiful-blonde-woman-relaxing-with-a-can-of-coke-on-a-tree-stump-by-the-beach.jpg" />
+    <Content Include="demo\static\photos\blond-using-her-laptop-at-her-bedroom.jpg" />
+    <Content Include="demo\static\photos\blue-sofa-with-pillows-in-a-designer-living-room-interior.jpg" />
+    <Content Include="demo\static\photos\book-on-the-grass.jpg" />
+    <Content Include="demo\static\photos\books-and-purple-flowers-on-a-wooden-stool-by-the-bed.jpg" />
+    <Content Include="demo\static\photos\brainstorming-session-with-creative-designers-2.jpg" />
+    <Content Include="demo\static\photos\brainstorming-session-with-creative-designers.jpg" />
+    <Content Include="demo\static\photos\businesswoman-working-at-her-laptop-2.jpg" />
+    <Content Include="demo\static\photos\businesswoman-working-at-her-laptop.jpg" />
+    <Content Include="demo\static\photos\city-lights-reflected-in-the-water-at-night.jpg" />
+    <Content Include="demo\static\photos\coffee-on-a-table-with-other-items.jpg" />
+    <Content Include="demo\static\photos\color-palette-guide-sample-colors-catalog-.jpg" />
+    <Content Include="demo\static\photos\colorful-exotic-flowers-and-greenery.jpg" />
+    <Content Include="demo\static\photos\contemporary-black-and-white-home-decor.jpg" />
+    <Content Include="demo\static\photos\cryptocurrency-bitcoin-coins-2.jpg" />
+    <Content Include="demo\static\photos\cryptocurrency-bitcoin-coins.jpg" />
+    <Content Include="demo\static\photos\cup-of-coffee-and-an-open-book.jpg" />
+    <Content Include="demo\static\photos\cup-of-coffee-on-table-in-cafe-2.jpg" />
+    <Content Include="demo\static\photos\cup-of-coffee-on-table-in-cafe.jpg" />
+    <Content Include="demo\static\photos\elegant-home-office-with-golden-accessories.jpg" />
+    <Content Include="demo\static\photos\everything-you-need-to-work-from-your-bed-2.jpg" />
+    <Content Include="demo\static\photos\everything-you-need-to-work-from-your-bed.jpg" />
+    <Content Include="demo\static\photos\fairy-lights-at-the-beach-in-bulgaria.jpg" />
+    <Content Include="demo\static\photos\finances-us-dollars-and-bitcoins-currency-money-2.jpg" />
+    <Content Include="demo\static\photos\finances-us-dollars-and-bitcoins-currency-money-3.jpg" />
+    <Content Include="demo\static\photos\finances-us-dollars-and-bitcoins-currency-money-4.jpg" />
+    <Content Include="demo\static\photos\finances-us-dollars-and-bitcoins-currency-money-5.jpg" />
+    <Content Include="demo\static\photos\finances-us-dollars-and-bitcoins-currency-money.jpg" />
+    <Content Include="demo\static\photos\friends-at-a-restaurant-drinking-wine.jpg" />
+    <Content Include="demo\static\photos\geometric-decoration-on-yellow-background.jpg" />
+    <Content Include="demo\static\photos\group-of-people-brainstorming-and-taking-notes-2.jpg" />
+    <Content Include="demo\static\photos\group-of-people-brainstorming-and-taking-notes-3.jpg" />
+    <Content Include="demo\static\photos\group-of-people-brainstorming-and-taking-notes-4.jpg" />
+    <Content Include="demo\static\photos\group-of-people-brainstorming-and-taking-notes.jpg" />
+    <Content Include="demo\static\photos\group-of-people-sightseeing-in-the-city.jpg" />
+    <Content Include="demo\static\photos\home-office-desk-with-macbook-iphone-calendar-watch-and-organizer.jpg" />
+    <Content Include="demo\static\photos\home-office-laptop-organizer-and-cup-of-coffee.jpg" />
+    <Content Include="demo\static\photos\making-magic-with-fairy-lights.jpg" />
+    <Content Include="demo\static\photos\man-looking-out-to-sea.jpg" />
+    <Content Include="demo\static\photos\modern-home-office.jpg" />
+    <Content Include="demo\static\photos\netflix-drug-lords-from-narcos.jpg" />
+    <Content Include="demo\static\photos\people-by-a-banquet-table-full-with-food.jpg" />
+    <Content Include="demo\static\photos\people-watching-a-presentation-in-a-room.jpg" />
+    <Content Include="demo\static\photos\pink-desk-in-the-home-office.jpg" />
+    <Content Include="demo\static\photos\portrait-of-a-teen-girl.jpg" />
+    <Content Include="demo\static\photos\soft-photo-of-woman-on-the-bed-with-the-book-and-cup-of-coffee-in-hands.jpg" />
+    <Content Include="demo\static\photos\stone-texture-high-resolution-background-2.jpg" />
+    <Content Include="demo\static\photos\stone-texture-high-resolution-background.jpg" />
+    <Content Include="demo\static\photos\stylish-workplace-with-computer-at-home.jpg" />
+    <Content Include="demo\static\photos\stylish-workspace-with-macbook-pro-2.jpg" />
+    <Content Include="demo\static\photos\stylish-workspace-with-macbook-pro.jpg" />
+    <Content Include="demo\static\photos\sweet-buns-with-cream-cheese-inside.jpg" />
+    <Content Include="demo\static\photos\tropical-palm-leaves-floral-pattern-background.jpg" />
+    <Content Include="demo\static\photos\white-apple-imac-computer-with-elephant-mousepad.jpg" />
+    <Content Include="demo\static\photos\woman-drinking-hot-tea-in-her-home-office.jpg" />
+    <Content Include="demo\static\photos\woman-drinking-tea-and-reading-book.jpg" />
+    <Content Include="demo\static\photos\woman-read-book-and-drink-coffee-2.jpg" />
+    <Content Include="demo\static\photos\woman-read-book-and-drink-coffee.jpg" />
+    <Content Include="demo\static\photos\woman-working-on-a-laptop-while-enjoying-a-breakfast-coffee-and-chocolate-in-bed-2.jpg" />
+    <Content Include="demo\static\photos\woman-working-on-a-laptop-while-enjoying-a-breakfast-coffee-and-chocolate-in-bed.jpg" />
+    <Content Include="demo\static\photos\woman-working-on-laptop-at-home-office.jpg" />
+    <Content Include="demo\static\photos\working-in-a-restaurant-macbook-cheese-cake-and-cup-of-coffee.jpg" />
+    <Content Include="demo\static\photos\workplace-with-laptop-on-table-at-home-2.jpg" />
+    <Content Include="demo\static\photos\workplace-with-laptop-on-table-at-home-3.jpg" />
+    <Content Include="demo\static\photos\workplace-with-laptop-on-table-at-home-4.jpg" />
+    <Content Include="demo\static\photos\workplace-with-laptop-on-table-at-home.jpg" />
+    <Content Include="demo\static\photos\young-entrepreneur-working-from-a-modern-cafe-2.jpg" />
+    <Content Include="demo\static\photos\young-entrepreneur-working-from-a-modern-cafe.jpg" />
+    <Content Include="demo\static\photos\young-woman-sitting-on-the-sofa-and-working-on-her-laptop-2.jpg" />
+    <Content Include="demo\static\photos\young-woman-sitting-on-the-sofa-and-working-on-her-laptop-3.jpg" />
+    <Content Include="demo\static\photos\young-woman-sitting-on-the-sofa-and-working-on-her-laptop-4.jpg" />
+    <Content Include="demo\static\photos\young-woman-sitting-on-the-sofa-and-working-on-her-laptop.jpg" />
+    <Content Include="demo\static\photos\young-woman-working-in-a-cafe.jpg" />
+    <Content Include="demo\static\products\apple-iphone7-special.jpg" />
+    <Content Include="demo\static\products\apple-iphone7.jpg" />
+    <Content Include="demo\static\products\apple-macbook-pro.jpg" />
+    <Content Include="demo\static\products\gopro-hero.jpg" />
+    <Content Include="demo\static\products\huawei-mate.jpg" />
+    <Content Include="demo\static\products\lenovo-tab.jpg" />
+    <Content Include="demo\static\products\lg-g6.jpg" />
+    <Content Include="demo\static\products\msi.jpg" />
+    <Content Include="demo\static\products\product-1.jpg" />
+    <Content Include="demo\static\products\product-10.jpg" />
+    <Content Include="demo\static\products\product-11.jpg" />
+    <Content Include="demo\static\products\product-12.jpg" />
+    <Content Include="demo\static\products\product-13.jpg" />
+    <Content Include="demo\static\products\product-2.jpg" />
+    <Content Include="demo\static\products\product-3.jpg" />
+    <Content Include="demo\static\products\product-4.jpg" />
+    <Content Include="demo\static\products\product-5.jpg" />
+    <Content Include="demo\static\products\product-6.jpg" />
+    <Content Include="demo\static\products\product-7.jpg" />
+    <Content Include="demo\static\products\product-8.jpg" />
+    <Content Include="demo\static\products\product-9.jpg" />
+    <Content Include="demo\static\products\samsung-galaxy.jpg" />
+    <Content Include="demo\static\products\sony-kd.jpg" />
+    <Content Include="demo\static\products\xiaomi-mi.jpg" />
+    <Content Include="demo\static\projects\dashboard-1.png" />
+    <Content Include="demo\static\projects\dashboard-2.png" />
+    <Content Include="demo\static\projects\dashboard-3.png" />
+    <Content Include="demo\static\sponsor-banner-homepage.svg" />
+    <Content Include="demo\static\sponsor-banner-readme.png" />
+    <Content Include="demo\static\tabler-preview.png" />
+    <Content Include="demo\static\tracks\014f38920ba75a4efd3488b4626cf6e16f94c9e5.jpg" />
+    <Content Include="demo\static\tracks\04168ff76158e7bed216979a5ea97c7e52b1e97c.jpg" />
+    <Content Include="demo\static\tracks\089726b25ce5a55b906b3b65580a517b65c7c881.jpg" />
+    <Content Include="demo\static\tracks\0b12aaeffdef54e56dda3c1b1cb5fbc8bc20f1ca.jpg" />
+    <Content Include="demo\static\tracks\0bb28beeb3f0b553d4b1b7a89061d72ad73b8a59.jpg" />
+    <Content Include="demo\static\tracks\0db34b6caab2312acdaee332be0c7a0ed3172a2a.jpg" />
+    <Content Include="demo\static\tracks\0dcc53286b2ed65d0667584ed5f557e385c25188.jpg" />
+    <Content Include="demo\static\tracks\11065380c7303972ca2d1d799d06f248fb442225.jpg" />
+    <Content Include="demo\static\tracks\1143cd331d7ff1c105fa8140d00edf286fb9f9a5.jpg" />
+    <Content Include="demo\static\tracks\18ca653b602887a9b211da03a7c26e8867b528e2.jpg" />
+    <Content Include="demo\static\tracks\1a9dab25976c706fffccb6bf2cf8a6f5eadd0d29.jpg" />
+    <Content Include="demo\static\tracks\213906d9faa26ccd959947613557ea3b75dde85b.jpg" />
+    <Content Include="demo\static\tracks\22c6434a15cc410c656356a9862a2afbe51205ff.jpg" />
+    <Content Include="demo\static\tracks\24b4146508ef0a7969de8d938ee875d0123989f6.jpg" />
+    <Content Include="demo\static\tracks\257b1dee9f7d1c6f41bfa567348f8444535feac6.jpg" />
+    <Content Include="demo\static\tracks\281357a445748bc906270ca7a01253f480eaf1b4.jpg" />
+    <Content Include="demo\static\tracks\285c50b8d12090ce411acf5eba9cca721a4a1c0a.jpg" />
+    <Content Include="demo\static\tracks\2be99e6ce2bb214a9072e315f4e17948af30af75.jpg" />
+    <Content Include="demo\static\tracks\2ccc3bd0455066a58b00083b3920c3642a072e42.jpg" />
+    <Content Include="demo\static\tracks\2e55b9c247cc6b0b713fbbce9db0527a932f8748.jpg" />
+    <Content Include="demo\static\tracks\2e7357491deb8a6796ee8d9181ca9ea1f407bb5f.jpg" />
+    <Content Include="demo\static\tracks\2fb88b8efab810c50670a2d9ca3abb2af35f01a0.jpg" />
+    <Content Include="demo\static\tracks\3144e46ee207860391866a086b41eb01749582d6.jpg" />
+    <Content Include="demo\static\tracks\363b158c2f5b904f9df760a6ae2b9aa2600e7521.jpg" />
+    <Content Include="demo\static\tracks\37c84d9b11d74b5625635a2c6c05aa80f4dc240c.jpg" />
+    <Content Include="demo\static\tracks\3abf5ca23380d633a3add2dab444b9a1b8012aeb.jpg" />
+    <Content Include="demo\static\tracks\41351ae11fec30f74422caffed8ba5a05d086d86.jpg" />
+    <Content Include="demo\static\tracks\446b2000ec677fed9e915790d8ee8ce021b7db72.jpg" />
+    <Content Include="demo\static\tracks\488f389cd61dba31b65e36768808c2d0da84737f.jpg" />
+    <Content Include="demo\static\tracks\49faef83b73d483c653f08aede55d81df52e9d18.jpg" />
+    <Content Include="demo\static\tracks\4d4ab714dfca7b9df41d4a02a2c39394ebdeb6b6.jpg" />
+    <Content Include="demo\static\tracks\4d78b06d3286a328a6a72268c474514f04932260.jpg" />
+    <Content Include="demo\static\tracks\4f6c0ba1317ea1d032ed8f1e5d51777f5ed78192.jpg" />
+    <Content Include="demo\static\tracks\56d8e3e1c597b0382c4dc236ba630d2a0f1eddf1.jpg" />
+    <Content Include="demo\static\tracks\5843ed4a56177db9ae39a09d23319f87a78ed7d6.jpg" />
+    <Content Include="demo\static\tracks\5a6c8514a481afe89cbf4f37b13dde14e62ed616.jpg" />
+    <Content Include="demo\static\tracks\5da09480ae1ab3f00cfaf6cd4e3a6ba03b4a5fd1.jpg" />
+    <Content Include="demo\static\tracks\5f9ed99f071ced583dfb5a1dcdac6c555dc755aa.jpg" />
+    <Content Include="demo\static\tracks\603793bf01019734d7b67b18f5e91220ea8deb14.jpg" />
+    <Content Include="demo\static\tracks\60e40883ae3c1edba925cedd554fc8dabc677ba1.jpg" />
+    <Content Include="demo\static\tracks\617c5567a6ed4342fb48df7ab753a8d9f2c0054b.jpg" />
+    <Content Include="demo\static\tracks\6207c3f216b3caeb36be9854040930819c38cf8d.jpg" />
+    <Content Include="demo\static\tracks\621d2909bcc2c26cd0b274aab0414c9d422a1576.jpg" />
+    <Content Include="demo\static\tracks\6607274645fa3302e4b885c1678e6e2fef40d889.jpg" />
+    <Content Include="demo\static\tracks\695dfa63a47c7db21c0124f1d598d54058063b94.jpg" />
+    <Content Include="demo\static\tracks\6ba02c2ab0ecc649a84fdafb4539e3ad71d0e6ab.jpg" />
+    <Content Include="demo\static\tracks\6bb542e3ff67f6a6ba2918bdff2e9c5bbabb94a1.jpg" />
+    <Content Include="demo\static\tracks\6e94ab39c917096d876b895dbab0019953d27a96.jpg" />
+    <Content Include="demo\static\tracks\71a9517412a65940f2203c7ee7b0eb352f31199c.jpg" />
+    <Content Include="demo\static\tracks\72c4be59e52052d4fa76c3abcf47921da517d88e.jpg" />
+    <Content Include="demo\static\tracks\73f4938130140174efb1cc0a82ececb277e40932.jpg" />
+    <Content Include="demo\static\tracks\748adbfec069804f4ce1c09f4bff86e0eb06f60e.jpg" />
+    <Content Include="demo\static\tracks\77b2563eda24abe226bc08d59a0dec59a07815e6.jpg" />
+    <Content Include="demo\static\tracks\77cb96a59f7a3bf4c6513781a1a48688f88330a3.jpg" />
+    <Content Include="demo\static\tracks\79b2422b467ad20c07576e8f8f5f2f1692ac7142.jpg" />
+    <Content Include="demo\static\tracks\7f6114053b1ad190459770bc7a941c95ca608b39.jpg" />
+    <Content Include="demo\static\tracks\7fb6b008325b9536dbd02ed14d0c47de59f65935.jpg" />
+    <Content Include="demo\static\tracks\81a97f9d44d189a959d4838364ee3d2056c88341.jpg" />
+    <Content Include="demo\static\tracks\8581468e913349d55449686175d6ad55f2efda47.jpg" />
+    <Content Include="demo\static\tracks\859337f0eaa49b1ad6ed76719b7c1ae26d6412c8.jpg" />
+    <Content Include="demo\static\tracks\896b2434b87ea37ba7f99183db5c99c60bc252a1.jpg" />
+    <Content Include="demo\static\tracks\8c48d9658ca7a04cebb1e568ffcca0c0c9fce576.jpg" />
+    <Content Include="demo\static\tracks\8ca79fea1c7bcd6e79eceb38d1f7b1a5c7b26d9f.jpg" />
+    <Content Include="demo\static\tracks\8ebf0216fa9d294177e79cfef03628ed68043454.jpg" />
+    <Content Include="demo\static\tracks\91f76bae8e1b8369fa2f4287af94d065d92e21cc.jpg" />
+    <Content Include="demo\static\tracks\93ad7f491db7df0cb517308e7bb847da41647618.jpg" />
+    <Content Include="demo\static\tracks\9901c9a39491c4456119dde7e626965c5342a6ba.jpg" />
+    <Content Include="demo\static\tracks\996e277d1049cef3442bc932c08d76e465436a18.jpg" />
+    <Content Include="demo\static\tracks\9b092f765831793404d46b816d688135ff32735f.jpg" />
+    <Content Include="demo\static\tracks\9d022729e6f9917b17800029b9308e8b563c7ab8.jpg" />
+    <Content Include="demo\static\tracks\9d99ddd56d7cf8599b6c8764fe62577df649de93.jpg" />
+    <Content Include="demo\static\tracks\9fa22d9c7a720db1e1addb60b86b6869851b4a76.jpg" />
+    <Content Include="demo\static\tracks\a4fb1d293bd8d3fd38352418c50fcf1369a7a87d.jpg" />
+    <Content Include="demo\static\tracks\a715f85cf0ba0cc2ed61e62d5441763871d83a5b.jpg" />
+    <Content Include="demo\static\tracks\a77d19d2ac9e19d59da67952fcf78c24d94f3848.jpg" />
+    <Content Include="demo\static\tracks\a8a4ee30b73a0454bd4d4245e36d87447c7f318d.jpg" />
+    <Content Include="demo\static\tracks\aa5b5b3795416a0e275d41838d9737c8faedad6c.jpg" />
+    <Content Include="demo\static\tracks\aac97056fc02fe02c7e95f7ff77a07c6e82f7d6e.jpg" />
+    <Content Include="demo\static\tracks\ab9e1e2e78d4f25e10364403dc13d7cffded6daf.jpg" />
+    <Content Include="demo\static\tracks\ac7215afbceb58c8a7f3713eaf9d00ff3d959779.jpg" />
+    <Content Include="demo\static\tracks\b089902e72614818a73c9dfc258633734761a6c1.jpg" />
+    <Content Include="demo\static\tracks\b114db565bfbdfed73f15cf11963428da1f10e90.jpg" />
+    <Content Include="demo\static\tracks\b77ddc595b81c3c9081fa38df536e47ccd08d5ac.jpg" />
+    <Content Include="demo\static\tracks\b8e4106aa31f47d16803def16904b0a7bc5e1a5a.jpg" />
+    <Content Include="demo\static\tracks\b93e4faa3b5300952e385b893e8d49037b7abc6e.jpg" />
+    <Content Include="demo\static\tracks\baa69b4e848c9ac4859aa7fd33ca592d384ebd94.jpg" />
+    <Content Include="demo\static\tracks\c07289080dac8c111fddc6fddcf239c645daac9d.jpg" />
+    <Content Include="demo\static\tracks\c396ca27ce8cfe43c41bff9cce5aadbb481bb3a0.jpg" />
+    <Content Include="demo\static\tracks\c3f13b4f7a674abda9aa36fd72fa341e918c0f26.jpg" />
+    <Content Include="demo\static\tracks\c6d8adf2461ca3e91156b645be472fbe1dcb0fc8.jpg" />
+    <Content Include="demo\static\tracks\c75a4b750f94fda9d1108c26d28ad47b69c46f09.jpg" />
+    <Content Include="demo\static\tracks\c76f990296ba4b77c85b569ca311f5eefbcf75e5.jpg" />
+    <Content Include="demo\static\tracks\c903b69c7c123786eb658afbbacbeb0a61fc108f.jpg" />
+    <Content Include="demo\static\tracks\c976bfc96d5e44820e553a16a6097cd02a61fd2f.jpg" />
+    <Content Include="demo\static\tracks\c9a8350feee77e9345eec4155cddc96694803d1a.jpg" />
+    <Content Include="demo\static\tracks\caf848886b4cd05003fb342f928b64ea09b305f3.jpg" />
+    <Content Include="demo\static\tracks\cc955a4bee6a76a217de86ce72dc3c304186bc7d.jpg" />
+    <Content Include="demo\static\tracks\cefff458b9d5cb4ce224de82dfddb390da9811ca.jpg" />
+    <Content Include="demo\static\tracks\cf0c8ff362a486a63527ac8c3fbec07b30854866.jpg" />
+    <Content Include="demo\static\tracks\cfb2a532996512eff95c4b0d566d067384aaa441.jpg" />
+    <Content Include="demo\static\tracks\d07f62044c007eb1b21ceac4c57a19b552797509.jpg" />
+    <Content Include="demo\static\tracks\d0b9aed7b44169ef38398496c8eb0fed14da89d2.jpg" />
+    <Content Include="demo\static\tracks\d3138273a495bdbc3e7f2b6a0b69213dceccfb66.jpg" />
+    <Content Include="demo\static\tracks\d35863120ae67588110c66bfa534bb645cf99a16.jpg" />
+    <Content Include="demo\static\tracks\d4e02c12a8ef14462f3b4f15df6398cdcfec9898.jpg" />
+    <Content Include="demo\static\tracks\d5fd5256e0763c1e9f60b054e33e82ca08fdeca8.jpg" />
+    <Content Include="demo\static\tracks\d85ff971ec79f3cb6743540ed0f416e2d0a1c311.jpg" />
+    <Content Include="demo\static\tracks\da194bbe320834f7cc18b51ab2a69ea0fcc93d3e.jpg" />
+    <Content Include="demo\static\tracks\dd00b1d051d4997779bf48fa56e6ecb6583ac4cc.jpg" />
+    <Content Include="demo\static\tracks\eb33214151082431206ab6e1ad4bbf83f487d58e.jpg" />
+    <Content Include="demo\static\tracks\ef96f4e6be04b4b8bde0861bd3d6b54f6c39408b.jpg" />
+    <Content Include="demo\static\tracks\f046d0f22f8b8f888f173758da202b54b309c3cb.jpg" />
+    <Content Include="demo\static\tracks\f04bb6fba32e89475d9981007aff21e13745dec2.jpg" />
+    <Content Include="demo\static\tracks\f164a2ba24b716986dbbf2c40d34e5c84bddeec3.jpg" />
+    <Content Include="demo\static\tracks\f34590c6e7b48c89e9e7b0b26586a47e1f427f65.jpg" />
+    <Content Include="demo\static\tracks\f4e96086f44c4dff1758b1fc1338cd88c1b5ce9c.jpg" />
+    <Content Include="demo\static\tracks\f54d58d3c8ff2fb935cfbd8461a7bf867ec88e8b.jpg" />
+    <Content Include="demo\static\tracks\f59354f8d3f2841e44c1bd7aa0cd55a22843cfc7.jpg" />
+    <Content Include="demo\static\tracks\f891f1864651e04eb94edd64b8e707e150e2425f.jpg" />
+    <Content Include="demo\static\tracks\fa3c3fea65a9a175bcf1fcd36d3c71763b5dc451.jpg" />
+    <Content Include="demo\static\tracks\fb4998c955d8eba049ffbfc7ab8523a4a4a1f7e9.jpg" />
+    <Content Include="demo\static\tracks\fe4ee21d30450829e5b172e806b3c1e14ca1e5f3.jpg" />
+    <Content Include="demo\static\tracks\ff2381a011d29cefb3804436ed29f60b4faa63d6.jpg" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model3.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model3.edmx</DependentUpon>
+      <LastGenOutput>Model3.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model3.edmx</DependentUpon>
+      <LastGenOutput>Model3.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="demo\.DS_Store" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\ar.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\ca.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\cs.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\de.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\el.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\en.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\es.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\et.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\fa.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\fi.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\fr.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\he.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\hi.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\hr.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\hu.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\hy.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\id.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\it.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\ja.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\ka.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\ko.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\lt.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\lv.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\nb.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\nl.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\pl.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\pt-br.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\pt.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\rs.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\ru.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\se.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\sk.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\sl.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\sq.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\th.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\tr.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\ua.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\zh-cn.json" />
+    <Content Include="demo\dist\libs\apexcharts\dist\locales\zh-tw.json" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.js.map" />
+    <Content Include="demo\dist\libs\bootstrap\dist\js\bootstrap.min.js.map" />
+    <Content Include="demo\dist\libs\dropzone\dist\basic.css.map" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone-min.js.map" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone.css.map" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone.js.map" />
+    <Content Include="demo\dist\libs\dropzone\dist\dropzone.mjs.map" />
+    <Content Include="demo\dist\libs\fslightbox\LICENSE" />
+    <Content Include="demo\dist\libs\fslightbox\package.json" />
+    <Content Include="demo\dist\libs\fslightbox\README.md" />
+    <Content Include="demo\dist\libs\list.js\dist\list.js.map" />
+    <Content Include="demo\dist\libs\list.js\dist\list.min.js.map" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.min.js.map" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.min.mjs.map" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.polyfilled.min.js.map" />
+    <Content Include="demo\dist\libs\plyr\dist\plyr.polyfilled.min.mjs.map" />
+    <Content Include="demo\dist\libs\tinymce\bower.json" />
+    <Content Include="demo\dist\libs\tinymce\CHANGELOG.md" />
+    <Content Include="demo\dist\libs\tinymce\composer.json" />
+    <Content Include="demo\dist\libs\tinymce\package.json" />
+    <Content Include="demo\dist\libs\tinymce\README.md" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\caret_position.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\change_listener.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\checkbox_options.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\clear_button.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\drag_drop.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\dropdown_header.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\dropdown_input.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\input_autogrow.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\no_active_items.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\no_backspace_delete.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\optgroup_columns.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\remove_button.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\restore_on_backspace.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\plugins\virtual_scroll.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.base.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.base.min.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.complete.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.complete.min.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.popular.js.map" />
+    <Content Include="demo\dist\libs\tom-select\dist\js\tom-select.popular.min.js.map" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Model2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model2.edmx.diagram">
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Model3.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model3.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model3.edmx.diagram">
+      <DependentUpon>Model3.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Anasayfa\Index.cshtml" />
+    <Content Include="Views\Shared\AnasayfaLayout.cshtml" />
+    <Content Include="Views\Anasayfa\Anasayfa.cshtml" />
+    <Content Include="Views\Anasayfa\Ayarlar.cshtml" />
+    <Content Include="Views\Anasayfa\UpTimeMonitor.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Anasayfa\Datatables.cshtml" />
+    <Content Include="Views\Kullanici\Kullanici.cshtml" />
+    <Content Include="Views\Shared\KullaniciLayout.cshtml" />
+    <Content Include="Views\Anasayfa\GayrimenkulIslemler.cshtml" />
+    <Content Include="Views\Anasayfa\Musteriler_YeniMusteri.cshtml" />
+    <Content Include="Views\Anasayfa\Chat.cshtml" />
+    <Content Include="Views\Anasayfa\Chat1.cshtml" />
+    <Content Include="Views\Anasayfa\GayrimenkulDetaylari.cshtml" />
+    <Content Include="Views\Anasayfa\MailGonder.cshtml" />
+    <Content Include="Views\Anasayfa\Bildirimler.cshtml" />
+    <Content Include="Views\Anasayfa\GelirDetay.cshtml" />
+    <Content Include="Views\Anasayfa\MusteriBilgisiDuzenle.cshtml" />
+    <Content Include="Views\Anasayfa\KonutBilgisiDuzenle.cshtml" />
+    <Content Include="Views\Anasayfa\EkraniKilitle.cshtml" />
+    <Content Include="Views\VeriIslemleri\Ekle.cshtml" />
+    <Content Include="Views\VeriIslemleri\UrunGetir.cshtml" />
+    <Content Include="Views\Anasayfa\KiraciBilgileri.cshtml" />
+    <Content Include="Views\Anasayfa\GayrimenkulDurumBilgileri.cshtml" />
+    <Content Include="Views\Anasayfa\KiraKontratlari.cshtml" />
+    <Content Include="Views\VeriIslemleri\UrunGetir2.cshtml" />
+    <Content Include="Views\VeriIslemleri\UrunGetir3.cshtml" />
+    <Content Include="Views\VeriIslemleri\Ekle3.cshtml" />
+    <Content Include="Views\Anasayfa\MusteriIslemleri.cshtml" />
+    <Content Include="Views\VeriIslemleri\EkleKiraci.cshtml" />
+    <Content Include="Views\VeriIslemleri\UrunGetirKiraci.cshtml" />
+    <Content Include="Views\Anasayfa\SifreDegistir.cshtml" />
+    <Content Include="Views\Anasayfa\Grafik.cshtml" />
+    <Content Include="Views\VeriIslemleri\Eklee.cshtml" />
+    <Content Include="Views\Login\ForgotPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="demo\dist\libs\countup.js\dist\countUp.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\calendar.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\core.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\datetime.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\index.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\interfaces.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\litepicker.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\methods.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\utils.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\litepicker\dist\types\window.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\nouislider\dist\nouislider.d.ts" />
+    <TypeScriptCompile Include="demo\dist\libs\tinymce\tinymce.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49742</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44360/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Bu proje bu bilgisayarda olmayan NuGet paketlerine başvuru yapıyor. Bunları indirmek için NuGet Paket Geri Yükleme'yi kullanın. Daha fazla bilgi için, bkz. http://go.microsoft.com/fwlink/?LinkID=322105. Eksik dosya: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,231 @@
+﻿@model WebApplication2.TBL_sozlesme
+
+@{
+    ViewBag.Title = "UrunGetir3";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+            .form-container h2 {
+                margin-bottom: 20px;
+                color: darkblue;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-message {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h6>Kira sözleşmesi bilgilerini güncelleme işlemi yapmaktasınız. Değişiklikler veritabanına kaydedilecektir.</h6>
+        <br />
+
+        @using (Html.BeginForm("Guncelle3", "VeriIslemleri", FormMethod.Post, new { id = "updateForm" }))
+        {
+            @Html.HiddenFor(m => m.soz_id) <!-- söz_id değerini saklamak için gizli alan -->
+
+    <div class="form-group">
+        <label style="color:darkblue">Konut Adres</label>
+        @Html.DropDownListFor(m => m.konut_id, (IEnumerable<SelectListItem>)ViewBag.Konutlar, "-- Konut Seçiniz --", new { @class = "form-control" })
+    </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Kiracı Adı</label>
+                @Html.DropDownListFor(m => m.kiraci_id, (IEnumerable<SelectListItem>)ViewBag.Kiracilar, "-- Kiracı Seçiniz --", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Ev Sahibi Adı</label>
+                @Html.DropDownListFor(m => m.konutsahibi_id, (IEnumerable<SelectListItem>)ViewBag.EvSahipleri, "-- Ev Sahibi Seçiniz --", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Sözleşme Tarihi</label>
+                @Html.TextBoxFor(m => m.soz_tarih, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Kontrat Bilgisi (Yıl giriniz.)</label>
+                @Html.TextBoxFor(m => m.kontrat_bilgisi, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Depozito Tutar</label>
+                @Html.TextBoxFor(m => m.depozito_tutar, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Depozito Durum</label>
+                @Html.DropDownListFor(m => m.depozito_durum, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Ödendi", Value = "True" },
+                    new SelectListItem { Text = "Ödenmedi", Value = "False" }
+                }, "-- Depozito Durumu Seçiniz --", new { @class = "form-control" })
+            </div>
+
+            <button class="btn btn-warning" type="submit">Güncelle</button>
+        }
+
+        <!-- The Modal for Error -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p class="modal-message">Tüm alanlar doldurulmalıdır!</p>
+            </div>
+        </div>
+
+        <!-- The Modal for Update Confirmation -->
+        <div id="updateModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeUpdateModal()">&times;</span>
+                <p class="modal-message">Verileriniz güncellendi!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myModal').hide(); // Sayfa yüklendiğinde hata modalını gizle
+            $('#updateModal').hide(); // Sayfa yüklendiğinde başarı modalını gizle
+
+            // Form gönderme işlemi
+            $('#updateForm').submit(function (e) {
+                e.preventDefault();
+                if (validateForm()) {
+                    $.ajax({
+                        url: '@Url.Action("Guncelle3", "VeriIslemleri")',
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        success: function (response) {
+                            if (response.success) {
+                                $('#updateModal').show(); // Başarılı modalı göster
+                                setTimeout(function () {
+                                    window.location.href = '@Url.Action("KiraKontratlari", "Anasayfa")';
+                                }, 1000); // 2 saniye sonra yönlendir
+                            } else {
+                                alert(response.message || "Güncelleme başarısız oldu.");
+                            }
+                        },
+                        error: function () {
+                            alert("Bir hata oluştu.");
+                        }
+                    });
+                } else {
+                    $('#myModal').show(); // Hata modalını göster
+                }
+            });
+
+            // Form doğrulama fonksiyonu
+            function validateForm() {
+                var konut_id = $('#konut_id').val();
+                var kiraci_id = $('#kiraci_id').val();
+                var konutsahibi_id = $('#konutsahibi_id').val();
+                var soz_tarih = $('#soz_tarih').val();
+                var kontrat_bilgisi = $('#kontrat_bilgisi').val();
+                var depozito_tutar = $('#depozito_tutar').val();
+                var depozito_durum = $('#depozito_durum').val();
+
+                if (konut_id === "" || kiraci_id === "" || konutsahibi_id === "" || soz_tarih === "" || kontrat_bilgisi === "" || depozito_tutar === "" || depozito_durum === "") {
+                    return false;
+                }
+
+                return true;
+            }
+
+            // Modal kapatma fonksiyonları
+            function closeModal() {
+                $('#myModal').hide();
+            }
+
+            function closeUpdateModal() {
+                $('#updateModal').hide();
+            }
+
+            // Modal dışına tıklama olayları
+            $(window).click(function (event) {
+                if (event.target === document.getElementById('myModal')) {
+                    $('#myModal').hide();
+                }
+                if (event.target === document.getElementById('updateModal')) {
+                    $('#updateModal').hide();
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

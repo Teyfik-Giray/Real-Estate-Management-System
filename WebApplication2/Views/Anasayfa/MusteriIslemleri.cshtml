@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "MusteriIslemleri";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+<!-- Page body -->
+@using WebApplication2;
+
+@model List<TBL_kiraci>
+<br />
+<br />
+<table class="table">
+    <tr class="bg-azure-lt">
+        <th style="color:darkblue;">Kiracı TC No</th>
+        <th style="color:darkblue;">Kiracı ADI - SOYADI</th>
+        <th style="color:darkblue;">Apartman/Blok </th>
+        <th style="color:darkblue;">Daire No</th>
+        <th style="color:darkblue;">Kira Gün</th>
+        <th style="color:darkblue;">SİL</th>
+        <th style="color:darkblue;">GÜNCELLE</th>
+    </tr>
+    <tbody>
+        @foreach (var ktgr in Model)
+        {
+            <tr class="bg-blue-lt">
+                <td style="color:black;"><b>@ktgr.kiraci_tc</b></td>
+                <td style="color:black;"><b>@ktgr.kiraci_ad @ktgr.kiraci_soyad</b></td>
+                <td style="color:black;"><b>@ktgr.apartman_blok</b></td>
+                <td style="color:black;"><b>@ktgr.kiraci_daire_no</b></td>
+
+                <td style="color:black;"><b>@ktgr.kira_gun</b></td>
+                <td style="color:black;">
+                    <button class="btn btn-danger" onclick="confirmDelete('@ktgr.kiraci_id')">SİL</button>
+                </td>
+                <td><a href="/VeriIslemleri/UrunGetirKiraci/@ktgr.kiraci_id" class="btn btn-success">GÜNCELLE</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/VeriIslemleri/EkleKiraci/" class="btn btn-primary">Yeni Kayıt Ekle</a>
+<br />
+<br />
+<br />
+
+<h4>Kiracınızı tanımladıktan sonra Kira Tanımlama işlemlerinden Kira Tutarı, Kira Durumu bilgilerini girmeyi unutmayınız!</h4>
+
+<!-- Modal -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p class="modal-message">Kaydı silmek istediğinize emin misiniz?</p>
+        <div class="modal-buttons">
+            <button class="btn btn-danger" onclick="deleteRecord()">Evet</button>
+            <button class="btn btn-secondary" onclick="closeModal()">Hayır</button>
+        </div>
+    </div>
+</div>
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: 15% auto;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .modal-message {
+        font-size: 18px;
+        color: #333;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+        color: #aaa;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+</style>
+<script>
+    function confirmDelete(kiraci_id) {
+        var modal = document.getElementById('confirmModal');
+        var modalMessage = modal.querySelector('.modal-message');
+        modalMessage.innerHTML = 'Kaydı silmek istediğinize emin misiniz?';
+
+        modal.style.display = 'block';
+
+        var deleteBtn = modal.querySelector('.btn-danger');
+        deleteBtn.onclick = function () {
+            window.location.href = '/VeriIslemleri/SilKiraci/' + kiraci_id;
+        };
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('confirmModal');
+        modal.style.display = 'none';
+    }
+</script>

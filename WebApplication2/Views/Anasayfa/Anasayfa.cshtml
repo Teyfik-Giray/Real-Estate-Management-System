@@ -1,0 +1,308 @@
+﻿
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+
+@using WebApplication2;
+
+@model WebApplication2.MyViewModel
+<main>
+
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    @*<div class="subheader">Sales</div>*@
+                                    <div class="ms-auto lh-1">
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Son 7 Gün</a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item active" href="#">Son 7 Gün</a>
+                                                <a class="dropdown-item" href="#">Son 30 Gün</a>
+                                                <a class="dropdown-item" href="#">Son 3 Ay</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="h1 mb-3">100%</div>
+                                <div class="d-flex mb-2">
+                                    <div>Yüzdelik Oran</div>
+                                    <div class="ms-auto">
+                                        <span class="text-green d-inline-flex align-items-center lh-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M3 17l6 -6l4 4l8 -8"></path>
+                                                <path d="M14 7l7 0l0 7"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                                @foreach (var item in Model.TBL_Kasa)
+                                {
+                                    double value = item.net_gelir.HasValue ? (double)item.net_gelir.Value : 0.0;
+                                    double net_gelir = Math.Min((value / 100000) * 100, 100);
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-primary" style="width: @net_gelir%" role="progressbar" aria-valuenow="@net_gelir" aria-valuemin="0" aria-valuemax="100" aria-label="@net_gelir% Complete">
+                                            <span class="visually-hidden">@net_gelir% Complete</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="subheader" style="font-size:1.2rem">Bugün</div>
+
+                                </div>
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        var today = new Date();
+                                        var date = today.toLocaleDateString();
+                                        document.getElementById("current-date").textContent = date;
+                                    });
+                                </script>
+                                <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+                                <div class="d-flex align-items-baseline">
+                                    <div class="h1 mt-5 mb-2 me-2">
+                                        <p id="current-date" style="font-size:2.2rem"></p>
+                                    </div>
+                                    <div class="me-auto">
+
+                                        <span class="text-green d-inline-flex align-items-center lh-1">
+                                        </span>
+                                    </div>
+                                    <i class="bi bi-calendar3 d-flex justify-content-end" style="font-size: 4rem;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Aylık Kira Takibi</h3>
+                            <div class="d-flex align-items-center">
+                                <table class="table">
+                                    <tr class="bg-azure-lt">
+                                        <th style="color:darkblue;">EV SAHİBİ ADI</th>
+                                        <th style="color: darkblue;">OCAK</th>
+                                        <th style="color: darkblue;">ŞUBAT</th>
+                                        <th style="color: darkblue;">MART</th>
+                                        <th style="color: darkblue;">NİSAN</th>
+                                        <th style="color: darkblue;">MAYIS</th>
+                                        <th style="color: darkblue;">HAZİRAN</th>
+                                        <th style="color: darkblue;">TEMMUZ</th>
+                                        <th style="color: darkblue;">AGUSTOS</th>
+                                        <th style="color: darkblue;">EYLÜL</th>
+                                        <th style="color: darkblue;">EKİM</th>
+                                        <th style="color: darkblue;">KASIM</th>
+                                        <th style="color: darkblue;">ARALIK</th>
+
+
+                                    </tr>
+                                    <tbody>
+
+
+                                        @foreach (var ktgr in Model.TBL_Aylikgelir)
+                                        { 
+                                            <tr class="bg-blue-lt">
+                                                <td style="color:black;"><b>@ktgr.TBL_evsahibi.konuts_ad @ktgr.TBL_evsahibi.konuts_soyad </b></td> 
+                                                <td style="color:black;"><b>@ktgr.Ocak </b></td>
+                                                <td style="color:black;"><b>@ktgr.Subat </b></td>
+                                                <td style="color:black;"><b>@ktgr.Mart </b></td>
+                                                <td style="color:black;"><b>@ktgr.Nisan </b></td>
+                                                <td style="color:black;"><b>@ktgr.Mayis </b></td>
+                                                <td style="color:black;"><b>@ktgr.Haziran </b></td>
+                                                <td style="color:black;"><b>@ktgr.Temmuz</b></td>
+                                                <td style="color:black;"><b>@ktgr.Agustos</b></td>
+                                                <td style="color:black;"><b>@ktgr.Eylul</b></td>
+                                                <td style="color:black;"><b>@ktgr.Ekim </b></td>
+                                                <td style="color:black;"><b>@ktgr.Kasim </b></td>
+                                                <td style="color:black;"><b>@ktgr.Aralik</b></td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*******GRAFİK KODU*******@
+
+
+                @*<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                    <script>
+        var votes = @Html.Raw(Json.Encode(Model.TBL_Aylikgelir));
+
+        var options = {
+            chart: {
+                type: 'bar',
+                height: '200%', // Yüksekliği % olarak belirleyin
+                width: '100%',  // Genişliği % olarak belirleyin
+                fontFamily: 'inherit',
+                parentHeightOffset: 0,
+                toolbar: {
+                    show: false,
+                },
+                animations: {
+                    enabled: false
+                },
+                stacked: true,
+            },
+            plotOptions: {
+                bar: {
+                    outerWidth: 10,
+                    columnWidth: '40%',
+                }
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: [{
+                name: '# of Votes',
+                data: votes.map(v => v.gelir)
+            }],
+            tooltip: {
+                theme: 'dark'
+            },
+            grid: {
+                padding: {
+                    top: -20,
+                    right: 0,
+                    left: -4,
+                    bottom: -4
+                },
+                strokeDashArray: 4,
+                xaxis: {
+                    lines: {
+                        show: false
+                    }
+                },
+            },
+            xaxis: {
+                labels: {
+                    padding: 0,
+                },
+                tooltip: {
+                    enabled: false
+                },
+                axisBorder: {
+                    show: false,
+                },
+                categories: votes.map(v => v.ay)
+            }
+
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+        chart.render();
+                    </script>*@
+
+
+
+
+                @********HARİTA KODU*******@
+
+                @*<div class="col-lg-6">
+                <div class="card" style="padding-top:3px;">
+                    <div class="card-body" style="padding-top:3px;">
+                        <h3 class="card-title" style="padding-top:3px;">Evlerin Konumları</h3>
+                        <div class="ratio ratio-21x9">
+                            <div>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101886.30830936384!2d37.29773571469972!3d37.058742954188055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1531e6b4f7f18c2f%3A0xc02e8b35116baad0!2sGaziantep!5e0!3m2!1str!2str!4v1716891762111!5m2!1str!2str" width="100%;" height="100%;" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                <br />
+                <br />
+
+
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">SÖZLEŞME BİLGİLERİ</h3>
+                            <div class="d-flex align-items-center">
+                                <table class="table">
+                                    <tr class="bg-azure-lt">
+                                        <th style="color:darkblue;">KİRACI ADI - SOYADI</th>
+                                        <th style="color: darkblue;">KİRACI TC</th>
+                                        <th style="color: darkblue;">KİRACI BLOK BİLGİSİ</th>
+                                        <th style="color: darkblue;">KİRA ÖDEME GÜNÜ</th>
+                                        <th style="color: darkblue;">SÖZLEŞME TARİHİ</th>
+                                        <th style="color: darkblue;">DEPOZİTO DURUM</th>
+                                        <th style="color: darkblue;">ANLIK ZAMAN</th>
+
+
+                                    </tr>
+                                    <tbody>
+                                        @foreach (var ktgr in Model.TBL_Sozlesme)
+                                        {
+                                            <tr class="bg-blue-lt">
+                                                <td style="color:black;"><b>@ktgr.TBL_kiraci.kiraci_ad @ktgr.TBL_kiraci.kiraci_soyad </b></td>
+                                                <td style="color:black;"><b>@ktgr.TBL_kiraci.kiraci_tc</b></td>
+                                                <td style="color:black;"><b>@ktgr.TBL_kiraci.apartman_blok</b></td>
+                                                <td style="color:black;"><b>@ktgr.TBL_kiraci.kira_gun</b></td>
+                                                <td style="color:black;"><b>@ktgr.soz_tarih</b></td>
+                                                <td style="color:black;">
+                                                    <b>
+                                                        @if (ktgr.depozito_durum.HasValue)
+                                                        {
+                                                            if (ktgr.depozito_durum.Value)
+                                                            {
+                                                                <label style="color:green">Ödendi</label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label style="color:red">Ödenmedi</label>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>Bilinmiyor</label>
+                                                        }
+                                                    </b>
+                                                </td>
+                                                <td style="color:black;"><b>@DateTime.Now</b></td>
+
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+               
+
+            </div>
+    </div>
+
+
+</main>

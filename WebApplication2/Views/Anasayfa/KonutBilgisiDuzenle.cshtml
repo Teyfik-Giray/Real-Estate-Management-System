@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "KonutBilgisiDuzenle";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+@using WebApplication2;
+
+@model List<TBL_konut>
+
+<table class="table">
+    <tr>
+        <th>KONUT ID</th>
+        <th>KONUT SAHİBİ ID</th>
+        <th>KİRACI ID</th>
+        <th>konut_adres</th>
+        <th>kira_tutar</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    <tbody>
+        @foreach (var ktgr in Model)
+        {
+            <tr>
+                <td>@ktgr.konut_id</td>
+                <td>@ktgr.konutsahibi_id</td>
+                <td>@ktgr.kiraci_id</td>
+                <td>@ktgr.konut_adres</td>
+                <td>@ktgr.kira_tutar</td>
+                <td><a href="/VeriIslemleri/Sil/@ktgr.konut_id" class="btn btn-danger">SİL</a></td>
+                <td><a href="/VeriIslemleri/UrunGetir/@ktgr.konut_id" class="btn btn-success">GUNCELLE</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/VeriIslemleri/Ekle/" class="btn btn-primary">Yeni Kayıt Ekle</a>

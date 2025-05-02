@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmlakModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBL_admin">
+    <Key>
+      <PropertyRef Name="Admin_id" />
+    </Key>
+    <Property Name="Admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Admin_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Admin_sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rol" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TBL_aylık_gelir">
+    <Key>
+      <PropertyRef Name="konut_sahibi" />
+    </Key>
+    <Property Name="konut_sahibi" Type="Int32" Nullable="false" />
+    <Property Name="Ocak" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Subat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Mart" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Nisan" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Mayis" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Haziran" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Temmuz" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Agustos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Eylul" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Ekim" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Kasim" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Aralik" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="TBL_evsahibi">
+    <Key>
+      <PropertyRef Name="konuts_id" />
+    </Key>
+    <Property Name="konuts_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="konuts_tc" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="konuts_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="konuts_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="konut_sayisi" Type="Int32" />
+    <Property Name="konuts_iban" Type="String" MaxLength="28" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBL_kasa" Relationship="Self.FK_TBL_kasa_TBL_evsahibi" FromRole="TBL_evsahibi" ToRole="TBL_kasa" />
+    <NavigationProperty Name="TBL_konut" Relationship="Self.FK_TBL_konut_TBL_evsahibi" FromRole="TBL_evsahibi" ToRole="TBL_konut" />
+    <NavigationProperty Name="TBL_sozlesme" Relationship="Self.FK_TBL_sozlesme_TBL_evsahibi" FromRole="TBL_evsahibi" ToRole="TBL_sozlesme" />
+  </EntityType>
+  <EntityType Name="TBL_gayrimenkul_durum">
+    <Key>
+      <PropertyRef Name="gayrimenkul_durum_id" />
+    </Key>
+    <Property Name="gayrimenkul_durum_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tur_id" Type="Int32" />
+    <Property Name="gayrimenkul_drm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gayrimenkul_tip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TBL_kasa">
+    <Key>
+      <PropertyRef Name="kasa_id" />
+    </Key>
+    <Property Name="kasa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="konut_sahibi_id" Type="Int32" />
+    <Property Name="gelir" Type="Int32" />
+    <Property Name="gider" Type="Int32" />
+    <Property Name="ay" Type="DateTime" Precision="0" />
+    <Property Name="net_gelir" Type="Double" />
+    <NavigationProperty Name="TBL_evsahibi" Relationship="Self.FK_TBL_kasa_TBL_evsahibi" FromRole="TBL_kasa" ToRole="TBL_evsahibi" />
+  </EntityType>
+  <EntityType Name="TBL_kiraci">
+    <Key>
+      <PropertyRef Name="kiraci_id" />
+    </Key>
+    <Property Name="kiraci_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kiraci_tc" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="kiraci_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kiraci_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="apartman_blok" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kiraci_daire_no" Type="Int32" />
+    <Property Name="kira_gun" Type="Int32" />
+    <NavigationProperty Name="TBL_konut" Relationship="Self.FK_TBL_konut_TBL_kiraci" FromRole="TBL_kiraci" ToRole="TBL_konut" />
+    <NavigationProperty Name="TBL_sozlesme" Relationship="Self.FK_TBL_sozlesme_TBL_kiraci" FromRole="TBL_kiraci" ToRole="TBL_sozlesme" />
+  </EntityType>
+  <EntityType Name="TBL_konut">
+    <Key>
+      <PropertyRef Name="konut_id" />
+    </Key>
+    <Property Name="konut_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="konutsahibi_id" Type="Int32" />
+    <Property Name="kiraci_id" Type="Int32" />
+    <Property Name="konut_adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="kira_tutar" Type="Int32" />
+    <Property Name="Kira_Durum" Type="Boolean" />
+    <NavigationProperty Name="TBL_evsahibi" Relationship="Self.FK_TBL_konut_TBL_evsahibi" FromRole="TBL_konut" ToRole="TBL_evsahibi" />
+    <NavigationProperty Name="TBL_kiraci" Relationship="Self.FK_TBL_konut_TBL_kiraci" FromRole="TBL_konut" ToRole="TBL_kiraci" />
+    <NavigationProperty Name="TBL_sozlesme" Relationship="Self.FK_TBL_sozlesme_TBL_konut" FromRole="TBL_konut" ToRole="TBL_sozlesme" />
+  </EntityType>
+  <EntityType Name="TBL_konutturu">
+    <Key>
+      <PropertyRef Name="tur_id" />
+    </Key>
+    <Property Name="tur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="konuttur_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="oda_sayısı" Type="Int32" />
+    <Property Name="metre_kare" Type="Int32" />
+    <Property Name="adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ısınma_turu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="esyalimi" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="gayrimenkul_durum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TBL_sozlesme">
+    <Key>
+      <PropertyRef Name="soz_id" />
+    </Key>
+    <Property Name="soz_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="konut_id" Type="Int32" />
+    <Property Name="kiraci_id" Type="Int32" />
+    <Property Name="konutsahibi_id" Type="Int32" />
+    <Property Name="soz_tarih" Type="DateTime" Precision="3" />
+    <Property Name="kontrat_bilgisi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="depozito_tutar" Type="Int32" />
+    <Property Name="depozito_durum" Type="Boolean" />
+    <NavigationProperty Name="TBL_evsahibi" Relationship="Self.FK_TBL_sozlesme_TBL_evsahibi" FromRole="TBL_sozlesme" ToRole="TBL_evsahibi" />
+    <NavigationProperty Name="TBL_kiraci" Relationship="Self.FK_TBL_sozlesme_TBL_kiraci" FromRole="TBL_sozlesme" ToRole="TBL_kiraci" />
+    <NavigationProperty Name="TBL_konut" Relationship="Self.FK_TBL_sozlesme_TBL_konut" FromRole="TBL_sozlesme" ToRole="TBL_konut" />
+  </EntityType>
+  <Association Name="FK_TBL_kasa_TBL_evsahibi">
+    <End Role="TBL_evsahibi" Type="Self.TBL_evsahibi" Multiplicity="0..1" />
+    <End Role="TBL_kasa" Type="Self.TBL_kasa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_evsahibi">
+        <PropertyRef Name="konuts_id" />
+      </Principal>
+      <Dependent Role="TBL_kasa">
+        <PropertyRef Name="konut_sahibi_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_konut_TBL_evsahibi">
+    <End Role="TBL_evsahibi" Type="Self.TBL_evsahibi" Multiplicity="0..1" />
+    <End Role="TBL_konut" Type="Self.TBL_konut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_evsahibi">
+        <PropertyRef Name="konuts_id" />
+      </Principal>
+      <Dependent Role="TBL_konut">
+        <PropertyRef Name="konutsahibi_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_sozlesme_TBL_evsahibi">
+    <End Role="TBL_evsahibi" Type="Self.TBL_evsahibi" Multiplicity="0..1" />
+    <End Role="TBL_sozlesme" Type="Self.TBL_sozlesme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_evsahibi">
+        <PropertyRef Name="konuts_id" />
+      </Principal>
+      <Dependent Role="TBL_sozlesme">
+        <PropertyRef Name="konutsahibi_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_konut_TBL_kiraci">
+    <End Role="TBL_kiraci" Type="Self.TBL_kiraci" Multiplicity="0..1" />
+    <End Role="TBL_konut" Type="Self.TBL_konut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_kiraci">
+        <PropertyRef Name="kiraci_id" />
+      </Principal>
+      <Dependent Role="TBL_konut">
+        <PropertyRef Name="kiraci_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_sozlesme_TBL_kiraci">
+    <End Role="TBL_kiraci" Type="Self.TBL_kiraci" Multiplicity="0..1" />
+    <End Role="TBL_sozlesme" Type="Self.TBL_sozlesme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_kiraci">
+        <PropertyRef Name="kiraci_id" />
+      </Principal>
+      <Dependent Role="TBL_sozlesme">
+        <PropertyRef Name="kiraci_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_sozlesme_TBL_konut">
+    <End Role="TBL_konut" Type="Self.TBL_konut" Multiplicity="0..1" />
+    <End Role="TBL_sozlesme" Type="Self.TBL_sozlesme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_konut">
+        <PropertyRef Name="konut_id" />
+      </Principal>
+      <Dependent Role="TBL_sozlesme">
+        <PropertyRef Name="konut_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmlakEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBL_admin" EntityType="Self.TBL_admin" />
+    <EntitySet Name="TBL_aylık_gelir" EntityType="Self.TBL_aylık_gelir" />
+    <EntitySet Name="TBL_evsahibi" EntityType="Self.TBL_evsahibi" />
+    <EntitySet Name="TBL_gayrimenkul_durum" EntityType="Self.TBL_gayrimenkul_durum" />
+    <EntitySet Name="TBL_kasa" EntityType="Self.TBL_kasa" />
+    <EntitySet Name="TBL_kiraci" EntityType="Self.TBL_kiraci" />
+    <EntitySet Name="TBL_konut" EntityType="Self.TBL_konut" />
+    <EntitySet Name="TBL_konutturu" EntityType="Self.TBL_konutturu" />
+    <EntitySet Name="TBL_sozlesme" EntityType="Self.TBL_sozlesme" />
+    <AssociationSet Name="FK_TBL_kasa_TBL_evsahibi" Association="Self.FK_TBL_kasa_TBL_evsahibi">
+      <End Role="TBL_evsahibi" EntitySet="TBL_evsahibi" />
+      <End Role="TBL_kasa" EntitySet="TBL_kasa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_konut_TBL_evsahibi" Association="Self.FK_TBL_konut_TBL_evsahibi">
+      <End Role="TBL_evsahibi" EntitySet="TBL_evsahibi" />
+      <End Role="TBL_konut" EntitySet="TBL_konut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_sozlesme_TBL_evsahibi" Association="Self.FK_TBL_sozlesme_TBL_evsahibi">
+      <End Role="TBL_evsahibi" EntitySet="TBL_evsahibi" />
+      <End Role="TBL_sozlesme" EntitySet="TBL_sozlesme" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_konut_TBL_kiraci" Association="Self.FK_TBL_konut_TBL_kiraci">
+      <End Role="TBL_kiraci" EntitySet="TBL_kiraci" />
+      <End Role="TBL_konut" EntitySet="TBL_konut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_sozlesme_TBL_kiraci" Association="Self.FK_TBL_sozlesme_TBL_kiraci">
+      <End Role="TBL_kiraci" EntitySet="TBL_kiraci" />
+      <End Role="TBL_sozlesme" EntitySet="TBL_sozlesme" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_sozlesme_TBL_konut" Association="Self.FK_TBL_sozlesme_TBL_konut">
+      <End Role="TBL_konut" EntitySet="TBL_konut" />
+      <End Role="TBL_sozlesme" EntitySet="TBL_sozlesme" />
+    </AssociationSet>
+    <FunctionImport Name="sp_GuncelYuzdelikHesapla" />
+    <FunctionImport Name="UpdateNetGelir" />
+    <EntitySet Name="sysdiagrams" EntityType="EmlakModel.sysdiagrams" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(EmlakModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(EmlakModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

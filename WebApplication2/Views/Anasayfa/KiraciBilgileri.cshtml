@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "KiraciBilgileri";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+@using WebApplication2;
+
+@model List<TBL_kiraci>
+<br /><br />
+<table class="table">
+    <tr class="bg-azure-lt">
+        <th style="color:darkblue;">KİRACI TC</th>
+        <th style="color:darkblue;">KİRACI AD</th>
+        <th style="color:darkblue;">KİRACI SOYAD</th>
+        <th style="color:darkblue;">Apartman/Blok</th>
+        <th style="color:darkblue;">KİRACI DAİRE NO</th>
+        @*<th style="color:darkblue;">KİRA DURUM</th>*@
+        <th style="color:darkblue;">KİRA GÜN</th>
+
+    </tr>
+    <tbody>
+        @foreach (var ktgr in Model)
+        {
+            <tr class="bg-blue-lt">
+                <td style="color:black;"><b>@ktgr.kiraci_tc</b></td>
+                <td style="color:black;"><b>@ktgr.kiraci_ad</b></td>
+                <td style="color:black;"><b>@ktgr.kiraci_soyad</b></td>
+                <td style="color:black;"><b>@ktgr.apartman_blok</b></td>
+                <td style="color:black;"><b>@ktgr.kiraci_daire_no</b></td>
+                @*<td style="color:black;"><b>@ktgr.kira_durum</b></td>*@
+                <td style="color:black;"><b>@ktgr.kira_gun</b></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

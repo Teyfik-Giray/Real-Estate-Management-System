@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Şifremi Unuttum - Tabler - Tepki veren ve yüksek kaliteli bir UI ile premium ve açık kaynaklı bir gösterge paneli şablonu.</title>
+    <!-- CSS dosyaları -->
+    <link href="~/demo/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="~/demo/dist/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="~/demo/dist/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="~/demo/dist/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="~/demo/dist/css/demo.min.css" rel="stylesheet" />
+    <link href="https://rsms.me/inter/inter.css" />
+
+</head>
+<body class=" d-flex flex-column">
+    <script src="~/demo/dist/js/demo-theme.js"></script>
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            <div class="text-center mb-4">
+                <a href="." class="navbar-brand navbar-brand-autodark"><img src="~/demo/static/logo.svg" height="36" alt=""></a>
+            </div>
+            @using (Html.BeginForm("Anasayfa", "Anasayfa", FormMethod.Post))
+            {
+                <form class="card card-md" action="./" method="post" autocomplete="off" novalidate>
+                    <div class="card-body text-center">
+                        <div class="mb-4">
+                            <h2 class="card-title">Hesap Kilidi Aç</h2>
+                            <p class="text-muted">Hesabınızı kilidini açmak için şifrenizi girin</p>
+                        </div>
+                        <div class="mb-4">
+                            <span class="avatar avatar-xl mb-3" style="background-image: url(./static/avatars/000m.jpg)">
+                                <img src="~/demo/static/avatars/000m.jpg" />
+                            </span>
+                            <h3>Paweł Kuna</h3>
+                        </div>
+                        <div class="mb-4">
+                            <input type="password" class="form-control" name="password" placeholder="Şifre">
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <!-- Download SVG ikonu için http://tabler-icons.io/i/lock-open -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" /><path d="M12 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M8 11v-5a4 4 0 0 1 8 0" /></svg>
+                                Kilidi Aç
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                if (ViewBag.Success == true)
+                {
+                    <div class="alert alert-success mt-3" role="alert">
+                        Hesap başarıyla kilidi açıldı.
+                    </div>
+                }
+                if (ViewBag.Error == true)
+                {
+                    <div class="alert alert-danger mt-3" role="alert">
+                        Şifre yanlış. Lütfen tekrar deneyin.
+                    </div>
+                }
+                }
+
+        </div>
+    </div>
+    <!-- Kütüphane JS -->
+    <!-- Tabler Ana -->
+    <script src="~/demo/dist/js/tabler.min.js" defer></script>
+    <script src="~/demo/dist/js/demo.min.js" defer></script>
+

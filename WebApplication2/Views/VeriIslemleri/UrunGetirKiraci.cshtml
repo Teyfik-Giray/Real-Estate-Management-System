@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "UrunGetirKiraci";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+@model WebApplication2.TBL_kiraci
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+            .form-container h2 {
+                margin-bottom: 20px;
+                color: darkblue;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-message {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h6>Bu sayfada kiracı bilgilerini güncellemektesiniz...</h6>
+        <br />
+
+
+        @using (Html.BeginForm("GuncelleKiraci", "VeriIslemleri", FormMethod.Post, new { id = "updateForm" }))
+        {
+            @Html.HiddenFor(m => m.kiraci_id) <!-- kiraci_id değerini saklamak için gizli alan -->
+
+            <div class="form-group">
+                <label style="color:darkblue">Kiracı TC (11 haneli)</label>
+                @Html.TextBoxFor(m => m.kiraci_tc, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Kiracı Adı</label>
+                @Html.TextBoxFor(m => m.kiraci_ad, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Kiracı Soyadı</label>
+                @Html.TextBoxFor(m => m.kiraci_soyad, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Apartman/Blok</label>
+                @Html.TextBoxFor(m => m.apartman_blok, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label style="color:darkblue">Kiracı Daire Numarası</label>
+                @Html.TextBoxFor(m => m.kiraci_daire_no, new { @class = "form-control" })
+            </div>
+
+
+            <div class="form-group">
+                <label style="color:darkblue">Kira Günü</label>
+                @Html.TextBoxFor(m => m.kira_gun, new { @class = "form-control" })
+            </div>
+
+            <button class="btn btn-warning" type="submit">Güncelle</button>
+        }
+
+        <!-- The Modal for Error -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p class="modal-message">Tüm alanlar doldurulmalıdır!</p>
+            </div>
+        </div>
+
+        <!-- The Modal for Update Confirmation -->
+        <div id="updateModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeUpdateModal()">&times;</span>
+                <p class="modal-message">Verileriniz güncellendi!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myModal').hide(); // Sayfa yüklendiğinde hata modalını gizle
+            $('#updateModal').hide(); // Sayfa yüklendiğinde başarı modalını gizle
+
+            // Form gönderme işlemi
+            $('#updateForm').submit(function (e) {
+                e.preventDefault();
+                if (validateForm()) {
+                    $.ajax({
+                        url: '@Url.Action("GuncelleKiraci", "VeriIslemleri")',
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        success: function (response) {
+                            if (response.success) {
+                                $('#updateModal').show(); // Başarılı modalı göster
+                                setTimeout(function () {
+                                    window.location.href = '@Url.Action("MusteriIslemleri", "Anasayfa")';
+                                }, 1000); // 2 saniye sonra yönlendir
+                            } else {
+                                alert(response.message || "Güncelleme başarısız oldu.");
+                            }
+                        },
+                        error: function () {
+                            alert("Bir hata oluştu.");
+                        }
+                    });
+                } else {
+                    $('#myModal').show(); // Hata modalını göster
+                }
+            });
+
+            // Form doğrulama fonksiyonu
+            function validateForm() {
+                var kiraci_tc = $('#kiraci_tc').val();
+                var kiraci_ad = $('#kiraci_ad').val();
+                var kiraci_soyad = $('#kiraci_soyad').val();
+                var apartman_blok = $('#apartman_blok').val();
+                var kiraci_daire_no = $('#kiraci_daire_no').val();
+                var kira_durum = $('#kira_durum').val();
+                var kira_gun = $('#kira_gun').val();
+
+                if (kiraci_tc === "" || kiraci_ad === "" || kiraci_soyad === "" || apartman_blok === "" || kiraci_daire_no === "" || kira_durum === "" || kira_gun === "") {
+                    return false;
+                }
+
+                return true;
+            }
+
+            // Modal kapatma fonksiyonları
+            function closeModal() {
+                $('#myModal').hide();
+            }
+
+            function closeUpdateModal() {
+                $('#updateModal').hide();
+            }
+
+            // Modal dışına tıklama olayları
+            $(window).click(function (event) {
+                if (event.target === document.getElementById('myModal')) {
+                    $('#myModal').hide();
+                }
+                if (event.target === document.getElementById('updateModal')) {
+                    $('#updateModal').hide();
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

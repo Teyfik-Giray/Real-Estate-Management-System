@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+            .form-container h2 {
+                margin-bottom: 20px;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 60px;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-message {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h6>Bu sayfada yeni konut ekleme işlemini gerçekleştirmektesiniz...</h6>
+        <br />
+        <form class="form-group" method="post" name="konutForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label style="color:darkblue">Tür Adı</label>
+                <select class="form-control" name="konuttur_ad">
+                    <option value="">Seçiniz</option>
+                    <option value="Daire">Daire</option>
+                    <option value="Ofis">Ofis</option>
+                    <option value="Müstakil Ev">Müstakil Ev</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Diğer">Diğer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Oda Sayısı</label>
+                <input type="text" class="form-control" name="oda_sayısı" />
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Metrekare Bilgisi</label>
+                <input type="text" class="form-control" name="metre_kare" />
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Adres</label>
+                <input type="text" class="form-control" name="adres" />
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Isınma Türü</label>
+                <select class="form-control" name="ısınma_turu">
+                    <option value="">Seçiniz</option>
+                    <option value="Doğal Gaz">Doğal Gaz</option>
+                    <option value="Klima">Klima</option>
+                    <option value="Soba">Soba</option>
+                    <option value="Diğer">Diğer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Eşyalı mı?</label>
+                <select class="form-control" name="esyalimi">
+                    <option value="">Seçiniz</option>
+                    <option value="Evet">Evet</option>
+                    <option value="Hayır">Hayır</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="color:darkblue">Durumu</label>
+                <select class="form-control" name="gayrimenkul_durum">
+                    <option value="">Seçiniz</option>
+                    <option value="Satılık">Satılık</option>
+                    <option value="Kiralık">Kiralık</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary btn-block" type="submit">KAYDET</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="confirmCancel()">İPTAL</button>
+
+        </form>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p class="modal-message">Some text in the Modal..</p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var konuttur_ad = document.forms["konutForm"]["konuttur_ad"].value;
+            var oda_sayısı = document.forms["konutForm"]["oda_sayısı"].value;
+            var metre_kare = document.forms["konutForm"]["metre_kare"].value;
+            var adres = document.forms["konutForm"]["adres"].value;
+            var ısınma_turu = document.forms["konutForm"]["ısınma_turu"].value;
+            var esyalimi = document.forms["konutForm"]["esyalimi"].value;
+            var gayrimenkul_durum = document.forms["konutForm"]["gayrimenkul_durum"].value;
+
+            if (konuttur_ad == "" || oda_sayısı == "" || metre_kare == "" || adres == "" || ısınma_turu == "" || esyalimi == "" || gayrimenkul_durum == "") {
+                var modal = document.getElementById("myModal");
+                var modalMessage = document.querySelector(".modal-message");
+                modalMessage.innerHTML = "Tüm alanlar doldurulmalıdır!";
+                modal.style.display = "block";
+                return false;
+            }
+            return true;
+        }
+         function confirmCancel() {
+     var modal = document.getElementById("myModal");
+     var modalMessage = document.querySelector(".modal-message");
+     modalMessage.innerHTML = "İşlem iptal edildi. Ana sayfaya yönlendiriliyorsunuz.";
+     modal.style.display = "block";
+     setTimeout(function() {
+         window.location.href = '@Url.Action("GayrimenkulIslemler", "Anasayfa")';
+     }, 2000);
+ }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

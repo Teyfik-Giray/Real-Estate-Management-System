@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "KiraKontratlari";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+
+@using WebApplication2;
+
+@model List<TBL_sozlesme>
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+
+        <div class="card-body">
+            <table class="table">
+                <tr class="bg-azure-lt">
+                    <th style="color:darkblue;">Konut Adres</th>
+                    <th style="color:darkblue;">Kiracı Adı- Soyadı</th>
+                    <th style="color:darkblue;">Konut Sahibi Adı- Soyad</th>
+                    <th style="color:darkblue;">Sözleşme Tarihi</th>
+                    <th style="color:darkblue;">Kontrat Bilgisi</th>
+                    <th style="color:darkblue;">Depozito Tutar</th>
+                    <th style="color:darkblue;">Depozito Durum</th>
+                    <th style="color:darkblue;">SİL</th>
+                    <th style="color:darkblue;">GÜNCELLE </th>
+                </tr>
+                <tbody>
+                    @foreach (var ktgr in Model)
+                    {
+                        <tr class="bg-blue-lt">
+                            <td style="color:black;">
+                                <b>
+                                    @if (ktgr.TBL_konut != null)
+                                    {
+                                        @ktgr.TBL_konut.konut_adres 
+                                    }
+                                    else
+                                    {
+                                        <span style="color:red;">Konut adres bilgisi bulunamadı</span>
+                                    }
+                                </b>
+                            </td>
+                            <td style="color:black;">
+                                <b>
+                                    @if (ktgr.TBL_kiraci != null)
+                                    {
+                                        @ktgr.TBL_kiraci.kiraci_ad @ktgr.TBL_kiraci.kiraci_soyad
+                                    }
+                                    else
+                                    {
+                                        <span style="color:red;">Kiracı bilgisi bulunamadı</span>
+                                    }
+                                </b>
+                            </td>
+                            <td style="color:black;">
+                                <b>
+                                    @if (ktgr.TBL_evsahibi != null)
+                                    {
+                                        @ktgr.TBL_evsahibi.konuts_ad @ktgr.TBL_evsahibi.konuts_soyad
+                                    }
+                                    else
+                                    {
+                                        <span style="color:red;">Ev sahibi bilgisi bulunamadı</span>
+                                    }
+                                </b>
+                            </td>
+                            <td style="color:black;"><b>@ktgr.soz_tarih</b></td>
+                            <td style="color:black;"><b>@ktgr.kontrat_bilgisi</b></td>
+                            <td style="color:black;"><b>@ktgr.depozito_tutar ₺</b></td>
+                            <td style="color:black;">
+                                <b>
+                                    @if (ktgr.depozito_durum.HasValue)
+                                    {
+                                        if (ktgr.depozito_durum.Value)
+                                        {
+                                            <label style="color:green">Ödendi</label>
+                                        }
+                                        else
+                                        {
+                                            <label style="color:red">Ödenmedi</label>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <label>Bilinmiyor</label>
+                                    }
+                                </b>
+                            </td>
+                            <td style="color:black;">
+                                <button class="btn btn-danger" onclick="confirmDelete('@ktgr.soz_id')">SİL</button>
+                            </td>
+                            <td style="color:black;"><a href="/VeriIslemleri/UrunGetir3/@ktgr.soz_id" class="btn btn-success">GÜNCELLE</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <a href="/VeriIslemleri/Ekle3/" class="btn btn-primary">Yeni Kayıt Ekle</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p class="modal-message">Kaydı silmek istediğinize emin misiniz?</p>
+        <div class="modal-buttons">
+            <button class="btn btn-danger" onclick="deleteRecord()">Evet</button>
+            <button class="btn btn-secondary" onclick="closeModal()">Hayır</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: 15% auto;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .modal-message {
+        font-size: 18px;
+        color: #333;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+        color: #aaa;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+</style>
+
+<script>
+    function confirmDelete(tur_id) {
+        var modal = document.getElementById('confirmModal');
+        var modalMessage = modal.querySelector('.modal-message');
+        modalMessage.innerHTML = 'Kaydı silmek istediğinize emin misiniz?';
+
+        modal.style.display = 'block';
+
+        var deleteBtn = modal.querySelector('.btn-danger');
+        deleteBtn.onclick = function () {
+            window.location.href = '/VeriIslemleri/Sil3/' + tur_id;
+        };
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('confirmModal');
+        modal.style.display = 'none';
+    }
+</script>

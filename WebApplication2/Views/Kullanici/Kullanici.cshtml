@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Kullanici";
+    Layout = "~/Views/Shared/KullaniciLayout.cshtml";
+}
+
+
+@using WebApplication2;
+
+@model WebApplication2.MyViewModel
+
+<main>
+
+    <!-- Page header -->
+    <!--<div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <h2 class="page-title">
+                        Tables
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- Page body -->
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card" style="padding-top:3px;">
+                            <div class="card-body" style="padding-top:3px;">
+                                <h3 class="card-title" style="padding-top:3px;">Evin Konumu</h3>
+                                <div class="ratio ratio-21x9">
+                                    <div>
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101886.30830936384!2d37.29773571469972!3d37.058742954188055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1531e6b4f7f18c2f%3A0xc02e8b35116baad0!2sGaziantep!5e0!3m2!1str!2str!4v1716891762111!5m2!1str!2str" width="100%;" height="100%;" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <p> </p>
+                    <div class="col-lg-12 mg">
+                        <div class="card" style="padding-top:3px;">
+                            <div class="card-body" style="padding-top:3px;">
+                                <h3 class="card-title" style="padding-top:3px;">GENEL BİGLİ</h3>
+                                <div class="ratio ratio-21x9">
+                                    <div>
+                                        <table class="table">
+                                            <tr class="bg-azure-lt">
+                                                <th style="color:darkblue;">KİRACI ADI - SOYADI</th>
+                                                @*<th>KİRACI SOYADI</th>*@
+                                                <th style="color: darkblue;">KİRACI TC</th>
+                                                <th style="color: darkblue;">KİRACI DAİRE NO</th>
+                                                <th style="color: darkblue;">KİRA ÖDEME GÜNÜ</th>
+                                                <th style="color: darkblue;">SÖZLEŞME TARİHİ</th>
+                                                <th style="color: darkblue;">DEPOZİTO DURUM</th>
+                                                <th style="color: darkblue;">ANLIK ZAMAN</th>
+
+
+                                            </tr>
+                                            <tbody>
+                                                @foreach (var ktgr in Model.TBL_Sozlesme)
+                                                {
+
+                                                    <tr class="bg-blue-lt">
+                                                        <td style="color:black;"><b>@ktgr.TBL_kiraci.kiraci_ad @ktgr.TBL_kiraci.kiraci_soyad </b></td>
+                                                        @*<td>@ktgr.TBL_kiraci.kiraci_soyad</td>*@
+                                                        <td style="color:black;"><b>@ktgr.TBL_kiraci.kiraci_tc</b></td>
+                                                        <td style="color:black;"><b>@ktgr.TBL_kiraci.kiraci_daire_no</b></td>
+                                                        <td style="color:black;"><b>@ktgr.TBL_kiraci.kira_gun</b></td>
+                                                        <td style="color:black;"><b>@ktgr.soz_tarih</b></td>
+                                                        <td style="color:black;">
+                                                            <b>
+                                                                @if (ktgr.depozito_durum.HasValue)
+                                                                {
+                                                                    if (ktgr.depozito_durum.Value)
+                                                                    {
+                                                                        <label style="color:green">Ödendi</label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label style="color:red">Ödenmedi</label>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <label>Bilinmiyor</label>
+                                                                }
+                                                            </b>
+                                                        </td>
+                                                        <td style="color:black;"><b>@DateTime.Now</b></td>
+
+
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+        </div>
+    </div>
+</main>

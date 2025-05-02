@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "GelirDetay";
+    Layout = "~/Views/Shared/AnasayfaLayout.cshtml";
+}
+
+@using WebApplication2;
+
+@model List<TBL_kasa>
+<br />
+<br />
+<table class="table">
+    <tr class="bg-azure-lt">
+        <th style="color:darkblue;">KONUT SAHİBİ ADI</th>
+        <th style="color:darkblue;"> GELİR</th>
+        <th style="color:darkblue;">GİDER</th>
+        <th style="color:darkblue;">NET GELİR </th>
+        <th style="color:darkblue;">AY</th>
+        <th style="color:darkblue;">GÜNCELLE</th>
+    </tr>
+    <tbody>
+        @foreach (var ktgr in Model)
+        {
+            <tr class="bg-blue-lt">
+
+                <td style="color:black;"><b>@ktgr.TBL_evsahibi.konuts_ad</b></td>
+                <td style="color:black;"><b>@ktgr.gelir ₺</b></td>
+                <td style="color:black;"><b>@ktgr.gider ₺</b></td>
+                <td style="color:black;"><b>@ktgr.net_gelir ₺</b></td>
+                <td style="color:black;"><b>@ktgr.ay</b></td>
+                <td style="color:black;"><a href="/VeriIslemleri/GelirGuncelle/@ktgr.kasa_id" class="btn btn-success">GÜNCELLE</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<br />
+<h4>Eklenen kira tutarı ve depozito tutarı kasanın gelir kısmına yansıtılmaktadır. Depozitonun kiracıya geri ödenmesi durumunda bu ücret gidere yansıtılmaktadır. </h4>
+<h4>Ödenmei durumundan ödendi durumuna güncellenen tutar gidere aynı şekilde eklenmektedir.</h4>
+<h4>Kullanıcıya eklenen kira tutarı ve depozito tutarı ödendi ise gelir kısmına yansıtılmaktadır. Depozitonun kiracıya geri ödenmesi durumunda bu ücret gidere yansıtılmaktadır. </h4>
+<h4>Ödenmedi durumundan güncellenip Kira ve Depozito tutarı ödendi olursa bu yine Gelir kısmına eklenmektedir.</h4>
+<h4>Ev sahibi yanlışlıkla Kirayı almadığı halde ödendi olarak sisteme girerse ve sonradan ödemediğini hatırlayıp ödenmedi olarak güncellerse yine gider kısmına eklenmektedir.</h4>
+
